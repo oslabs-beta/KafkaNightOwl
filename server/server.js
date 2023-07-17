@@ -4,7 +4,11 @@ const port = 3000;
 const path = require('path');
 
 //Serve static files
-app.use(express.static(path.resolve(__dirname,'filedirforclient')));
+app.use(express.static(path.resolve(__dirname, '../client')));
+
+app.get("/", (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, "../index.html"));
+});
 
 // Catch-all route
 app.get('*', (req, res) => {
