@@ -14,8 +14,8 @@ const Tabs: React.FC<TabsProps> = ({changeTab, tab}): ReactElement => {
 				<a className={`tab tab-md tab-bordered w-48 text-base ${tab === 'brokers' && 'tab-active'}`} onClick={() => changeTab('brokers')}>
 					Brokers
 				</a>
-				<a className={`tab tab-md tab-bordered w-48 text-base ${tab === 'producers' && 'tab-active'}`} onClick={() => changeTab('producers')}>Producers</a>
-				<a className={`tab tab-md tab-bordered w-48 text-base ${tab === 'consumers' && 'tab-active'}`} onClick={() => changeTab('consumers')}>Consumers</a>
+				{/* <a className={`tab tab-md tab-bordered w-48 text-base ${tab === 'producers' && 'tab-active'}`} onClick={() => changeTab('producers')}>Producers</a>
+				<a className={`tab tab-md tab-bordered w-48 text-base ${tab === 'consumers' && 'tab-active'}`} onClick={() => changeTab('consumers')}>Consumers</a> */}
 			</div>
     </div>
   )
