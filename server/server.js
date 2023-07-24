@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = 3000;
 const path = require('path');
 
 //Serve static files
@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log('server started on 5000');
+  console.log('server started on 3000');
 });
 
 module.exports = app;
