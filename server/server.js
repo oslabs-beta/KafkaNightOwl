@@ -2,9 +2,14 @@ const express = require('express');
 const app = express();
 const port = 5050;
 const path = require('path');
+const metricsRouter = require('./routers/metricsRouter.js');
 
 //Serve static files
 app.use(express.static(path.resolve(__dirname, '../client')));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/jmx', metricsRouter);
 
 app.get("/", (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, "../index.html"));
