@@ -17,8 +17,8 @@ const App: React.FC<AppProps> = (): ReactElement => {
 		if (newTab === 'overview') 				setTab('overview')
 		else if (newTab === 'topics') 		setTab('topics')
 		else if (newTab === 'brokers') 		setTab('brokers')
-		else if (newTab === 'producers') 	setTab('producers')
-		else if (newTab === 'consumers') 	setTab('consumers')
+		// else if (newTab === 'producers') 	setTab('producers')
+		// else if (newTab === 'consumers') 	setTab('consumers')
 	}
 
 	return (
@@ -30,8 +30,8 @@ const App: React.FC<AppProps> = (): ReactElement => {
 					{tab === 'overview' && <Overview />}
 					{tab === 'topics' && <Topics />}
 					{tab === 'brokers' && <Brokers />}
-					{tab === 'producers' && <Producers />}
-					{tab === 'consumers' && <Consumers />}
+					{/* {tab === 'producers' && <Producers />}
+					{tab === 'consumers' && <Consumers />} */}
 				</div>
 			</div>
 		</>
