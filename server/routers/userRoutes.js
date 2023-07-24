@@ -4,7 +4,7 @@ const validateToken = require('../middleware/validateTokenHandler');
 const { signupUser, loginUser, getUser } = require('../controllers/userController');
 
 
-router.post("/singup", signupUser);
+router.post("/signup", signupUser);
 
 router.post("/login", loginUser);
 

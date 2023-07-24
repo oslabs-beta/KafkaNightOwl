@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require('path');
+const connectDb = require('./config/dbConnection');
 
+connectDb();
 //Serve static files
 app.use(express.static(path.resolve(__dirname, '../client')));
 
