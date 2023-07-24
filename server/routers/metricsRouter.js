@@ -14,29 +14,29 @@ router.post(
   }
 );
 
-router.post(
-  '/metrics', 
-  metricsController.middleware, 
-  (req, res) => {
-  res.status(200).json(res.locals.name);
-  }
-);
+// router.post(
+//   '/metrics', 
+//   metricsController.middleware, 
+//   (req, res) => {
+//   res.status(200).json(res.locals.name);
+//   }
+// );
 
-router.post(
-  '/metrics', 
-  metricsController.middleware, 
-  (req, res) => {
-  res.status(200).json(res.locals.name);
-  }
-);
+// router.post(
+//   '/metrics', 
+//   metricsController.middleware, 
+//   (req, res) => {
+//   res.status(200).json(res.locals.name);
+//   }
+// );
 
-router.post(
-  '/metrics', 
-  metricsController.middleware, 
-  (req, res) => {
-  res.status(200).json(res.locals.name);
-  }
-);
+// router.post(
+//   '/metrics', 
+//   metricsController.middleware, 
+//   (req, res) => {
+//   res.status(200).json(res.locals.name);
+//   }
+// );
 
 
 module.exports = router;

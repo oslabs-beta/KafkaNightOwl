@@ -13,30 +13,36 @@ const metricsController = {
     const { broker } = req.body;
     try {
       const activeController = await axios.get(
-        `http://${broker}/api/v1/query?query=sum(rate(kafka_controller_kafkacontroller_activecontrollercount[1m]))`
+        `http://${broker}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount[1m]`
       );
       const underRepPartitions = await axios.get(
-        `http://${broker}/api/v1/query?query=sum(rate(kafka_server_replicamanager_underreplicatedpartitions[1m]))`
+        `http://${broker}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions[1m]`
       );
-      const offlinePartitions = await axios.get(
-        `http://${broker}/api/v1/query?query=sum(rate(kafka_controller_kafkacontroller_offlinepartitionscount[1m]))`
+      const activebrokercount = await axios.get(
+        `http://${broker}/api/v1/query?query=kafka_controller_kafkacontroller_activebrokercount`
       );
-      const cpuMetric = await axios.get(
-        `http://${broker}/api/v1/query?query=sum(rate(process_cpu_seconds_total[1m])) * 100`
-      );
-      const ramUsage = await axios.get(
-        `http://${broker}/api/v1/query?query=sum(rate(process_resident_memory_bytes[1m]))`
-      );
-      const latency = await axios.get(
-        `http://${broker}/api/v1/query?query=sum(rate(kafka_network_requestmetrics_totaltimems{}[1m]) - rate(kafka_network_requestmetrics_localtimems{}[1m]))`
-      );
+      // const offlinePartitions = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(kafka_controller_kafkacontroller_offlinepartitionscount[1m]))`
+      // );
+      // const cpuMetric = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(process_cpu_seconds_total[1m])) * 100`
+      // );
+      // const ramUsage = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(process_resident_memory_bytes[1m]))`
+      // );
+      // const latency = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(kafka_network_requestmetrics_totaltimems{}[1m]) - rate(kafka_network_requestmetrics_localtimems{}[1m]))`
+      // );
       res.locals.coreMetrics = {
-        activeController: activeController.data.data.result[0].value[1],
-        underRepPartitions: underRepPartitions.data.data.result[0].value[1],
-        offlinePartitions: offlinePartitions.data.data.result[0].value[1],
-        cpuMetric: cpuMetric.data.data.result[0].value[1],
-        ramUsage: ramUsage.data.data.result[0].value[1],
-        latency: latency.data.data.result[0].value[1],
+        activeController: activeController.data,
+        underRepPartitions: underRepPartitions.data,
+        activebrokercount: activebrokercount.data,
+        // activeController: activeController.data.data.result[0].value[1],
+        // underRepPartitions: underRepPartitions.data.data.result[0].value[1],
+        // offlinePartitions: offlinePartitions.data.data.result[0].value[1],
+        // cpuMetric: cpuMetric.data.data.result[0].value[1],
+        // ramUsage: ramUsage.data.data.result[0].value[1],
+        // latency: latency.data.data.result[0].value[1],
       };
       return next();
     } catch (err) {

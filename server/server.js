@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 5050;
 const path = require('path');
-const metricsRouter = require('./routes/metricsRouter.js');
+const metricsRouter = require('./routers/metricsRouter.js');
 
 //Serve static files
 app.use(express.static(path.resolve(__dirname, '../client')));
