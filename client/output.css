@@ -1523,10 +1523,6 @@ html {
   height: 15rem;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .w-12 {
   width: 3rem;
 }
@@ -1590,11 +1586,6 @@ html {
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
-}
-
-.bg-slate-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
 .py-4 {
