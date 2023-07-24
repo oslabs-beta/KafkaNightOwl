@@ -3,7 +3,9 @@ const app = express();
 const port = 5050;
 const path = require('path');
 const metricsRouter = require('./routers/metricsRouter.js');
+const connectDb = require('./config/dbConnection');
 
+connectDb();
 //Serve static files
 app.use(express.static(path.resolve(__dirname, '../client')));
 
