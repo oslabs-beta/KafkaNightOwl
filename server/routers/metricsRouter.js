@@ -1,5 +1,5 @@
 const express = require('express');
-const metricsController = require('../controllers/metricsController.js');
+const metricsController = require('../controllers/metricsController');
 const router = express.Router();
 
 // POST request to metrics endpoint
@@ -10,6 +10,7 @@ router.post(
   '/coreMetrics', 
   metricsController.getCoreMetrics, 
   (req, res) => {
+  console.log('getCoreMetrics ping!')
   res.status(200).json(res.locals.coreMetrics);
   }
 );

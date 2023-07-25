@@ -6,20 +6,31 @@ import data from "../../data.json";
 import React from "react";
 import { Chart as Chartjs } from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import axios from "axios";
 Chartjs.register(CategoryScale);
 
-type OverviewProps = {};
+type OverviewProps = {
+  server: string;
+};
 
-const Overview: React.FC<OverviewProps> = (): ReactElement => {
+const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
   const DELAY_IN_MS = 15000;
-  console.log(data);
+  // console.log(data);
 
+  // USE EFFECT
   useEffect(() => {
-    const interval: NodeJS.Timer = setInterval(() => {
+    // SET INTERVAL
+    const interval: NodeJS.Timer = setInterval(async () => {
       // fetch goes here
+      console.log('server',server)
+      const response = await axios.post("http://localhost:5050/jmx/coreMetrics", {
+        port: server,
+      });
+      console.log("response", response);
     }, DELAY_IN_MS);
     return () => clearInterval(interval);
-  });
+  }, [server]);
+
   //  ------ chartjs react tutorial ------
   // const [userData, setUserData] = useState()
   const userData = {
@@ -48,3 +59,15 @@ const Overview: React.FC<OverviewProps> = (): ReactElement => {
 };
 
 export default Overview;
+
+// scratch comments below
+/*
+		const x = activeControllers: activeControllers.data.data.result[0].values,
+        underRepPartitions: underRepPartitions.data.data.result[0].values,
+        activebrokers: activebrokers.data.data.result[0].values,
+        offlinePartitions: offlinePartitions.data.data.result[0].values,
+        totalTopics: totalTopics.data.data.result[0].values,
+        totalPartitions: totalPartitions.data.data.result[0].values,
+
+				
+		*/

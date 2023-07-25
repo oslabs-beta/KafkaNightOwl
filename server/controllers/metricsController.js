@@ -10,6 +10,7 @@ const axios = require("axios");
 
 const metricsController = {
   async getCoreMetrics(req, res, next) {
+    console.log('metricsController ping!!!')
     const { port } = req.body;
     try {
       // const activeController = await axios.get(

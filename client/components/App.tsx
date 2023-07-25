@@ -11,7 +11,7 @@ type AppProps = {};
 
 const App: React.FC<AppProps> = (): ReactElement => {
 	const [tab, setTab] = useState<string>('overview');
-	const [server, setServer] = useState<string | null>(null);
+	const [server, setServer] = useState<string>('');
 
 	function changeTab(newTab: string) {
 		if (newTab === 'overview') 				setTab('overview')
@@ -20,14 +20,19 @@ const App: React.FC<AppProps> = (): ReactElement => {
 		// else if (newTab === 'producers') 	setTab('producers')
 		// else if (newTab === 'consumers') 	setTab('consumers')
 	}
-
+	// function serverInput()
+	const serverInput=(serverString: string)=>{
+		console.log('Made it to App.tsx', serverString);
+		if(!serverString) return console.error('Please input Port num');
+		setServer(serverString);
+	}
 	return (
 		<>
 			<div className='flex h-screen w-auto'>
-				<Sidebar />
+				<Sidebar serverInput={serverInput}/>
 				<div className='w-screen'>
 				<Tabs changeTab={changeTab} tab={tab} />
-					{tab === 'overview' && <Overview />}
+					{tab === 'overview' && <Overview server={server}/>}
 					{tab === 'topics' && <Topics />}
 					{tab === 'brokers' && <Brokers />}
 					{/* {tab === 'producers' && <Producers />}
