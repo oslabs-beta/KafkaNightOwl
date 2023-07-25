@@ -1,5 +1,5 @@
 const express = require('express');
-const metricsController = require('../controllers/metricsController.js');
+const metricsController = require('../controllers/metricsController');
 const router = express.Router();
 
 // POST request to metrics endpoint
@@ -14,21 +14,21 @@ router.post(
   }
 );
 
-// router.post(
-//   '/metrics', 
-//   metricsController.middleware, 
-//   (req, res) => {
-//   res.status(200).json(res.locals.name);
-//   }
-// );
+router.post(
+  '/topicMetrics', 
+  metricsController.topicMetrics, 
+  (req, res) => {
+  res.status(200).json(res.locals.topicMetrics);
+  }
+);
 
-// router.post(
-//   '/metrics', 
-//   metricsController.middleware, 
-//   (req, res) => {
-//   res.status(200).json(res.locals.name);
-//   }
-// );
+router.post(
+  '/brokerMetrics', 
+  metricsController.brokerMetrics, 
+  (req, res) => {
+  res.status(200).json(res.locals.brokerMetrics);
+  }
+);
 
 // router.post(
 //   '/metrics', 

@@ -1,20 +1,23 @@
 import { ReactElement } from "react";
+import { Line } from "react-chartjs-2";
+import React from 'react';
 
 type ChartProps = {
   title?: string
+  data?: any
 };
 
-const Chart: React.FC<ChartProps> = ({title}): ReactElement => {
+const Chart: React.FC<ChartProps> = ({title, data}): ReactElement => {
   return (
     <>
       <div className="flex flex-col">
         <div className="flex flex-col items-end content-center">
-          <h4 className="text-gray-400">{title ? title : '-- / --'}</h4>
+          <h4 className="text-gray-400">{title ? title : "-- / --"}</h4>
         </div>
-        <iframe className="bg-slate-100 h-72 w-96" src=""></iframe>
+        <Line data={data} width={2} height={1} />
       </div>
     </>
-  )
+  );
 }
 
 export default Chart;
