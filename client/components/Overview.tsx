@@ -15,7 +15,7 @@ type OverviewProps = {
 
 const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
   const [overviewData, setOverviewData] = useState(null);
-
+  console.log(overviewData)
   if (server !== '') {
     useEffect(() => {
       const fetchData = async () => {
@@ -25,7 +25,8 @@ const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
         setOverviewData(response.data)
       }
       fetchData()
-      const interval = setInterval(fetchData, 15000);
+      console.log('server', server)
+      const interval = setInterval(fetchData, 5000);
       return () => clearInterval(interval);
     }, [])
   }

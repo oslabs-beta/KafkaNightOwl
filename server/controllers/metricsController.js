@@ -19,48 +19,49 @@ const metricsController = {
         //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount[1m]`
         // );
         const activeControllers = await axios.get(
-          `http://${port}/api/v1/query_range?query=kafka_controller_kafkacontroller_activecontrollercount&start=${then}&end=${now}&step=15s`
+          `http://${port}/api/v1/query?query=kafka_controller_KafkaController_Value{name="ActiveControllerCount",}[1m]`
         );
-      // // const underRepPartitions = await axios.get(
-      // //   `http://${port}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions[1m]`
-      // // );
+      console.log(activeControllers.data)
       // const underRepPartitions = await axios.get(
-      //   `http://${port}/api/v1/query?query=kafka_server_replicamanager_value{name="UnderReplicatedPartitions",}[1m]`
+      //   `http://${port}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions[1m]`
       // );
-      // // const activebrokercount = await axios.get(
-      // //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_activebrokercount`
-      // // );
-      // const activebrokers = await axios.get(
-      //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="ActiveBrokerCount",}[1m]`
+      const underRepPartitions = await axios.get(
+        `http://${port}/api/v1/query?query=kafka_server_replicamanager_value{name="UnderReplicatedPartitions",}[1m]`
+      );
+      // const activebrokercount = await axios.get(
+      //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_activebrokercount`
       // );
-      // // const offlinePartitions = await axios.get(
-      // //   `http://${broker}/api/v1/query?query=sum(rate(kafka_controller_kafkacontroller_offlinepartitionscount[1m]))`
-      // // );
+      const activebrokers = await axios.get(
+        `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="ActiveBrokerCount",}[1m]`
+      );
       // const offlinePartitions = await axios.get(
-      //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="OfflinePartitionsCount",}[1m]`
+      //   `http://${broker}/api/v1/query?query=sum(rate(kafka_controller_kafkacontroller_offlinepartitionscount[1m]))`
       // );
-      // const totalTopics = await axios.get(
-      //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="GlobalTopicCount",}[1m]`
+      const offlinePartitions = await axios.get(
+        `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="OfflinePartitionsCount",}[1m]`
+      );
+      const totalTopics = await axios.get(
+        `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="GlobalTopicCount",}[1m]`
+      );
+      const totalPartitions = await axios.get(
+        `http://${port}/api/v1/query?query=kafka_server_replicamanager_value{name="PartitionCount",}[1m]`
+      );
+      // const cpuMetric = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(process_cpu_seconds_total[1m])) * 100`
       // );
-      // const totalPartitions = await axios.get(
-      //   `http://${port}/api/v1/query?query=kafka_server_replicamanager_value{name="PartitionCount",}[1m]`
+      // const ramUsage = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(process_resident_memory_bytes[1m]))`
       // );
-      // // const cpuMetric = await axios.get(
-      // //   `http://${broker}/api/v1/query?query=sum(rate(process_cpu_seconds_total[1m])) * 100`
-      // // );
-      // // const ramUsage = await axios.get(
-      // //   `http://${broker}/api/v1/query?query=sum(rate(process_resident_memory_bytes[1m]))`
-      // // );
-      // // const latency = await axios.get(
-      // //   `http://${broker}/api/v1/query?query=sum(rate(kafka_network_requestmetrics_totaltimems{}[1m]) - rate(kafka_network_requestmetrics_localtimems{}[1m]))`
-      // // );
+      // const latency = await axios.get(
+      //   `http://${broker}/api/v1/query?query=sum(rate(kafka_network_requestmetrics_totaltimems{}[1m]) - rate(kafka_network_requestmetrics_localtimems{}[1m]))`
+      // );
       res.locals.coreMetrics = {
-        activeControllers: activeControllers.data.data.result[0].values,
-        // underRepPartitions: underRepPartitions.data.data.result[0].values,
-        // activebrokers: activebrokers.data.data.result[0].values,
-        // offlinePartitions: offlinePartitions.data.data.result[0].values,
-        // totalTopics: totalTopics.data.data.result[0].values,
-        // totalPartitions: totalPartitions.data.data.result[0].values,
+        activeControllers: activeControllers.data.data.result,
+        underRepPartitions: underRepPartitions.data.data.result,
+        activebrokers: activebrokers.data.data.result,
+        offlinePartitions: offlinePartitions.data.data.result,
+        totalTopics: totalTopics.data.data.result,
+        totalPartitions: totalPartitions.data.data.result,
         // // activeController: activeController.data.data.result[0].value[1],
         // // underRepPartitions: underRepPartitions.data.data.result[0].value[1],
         // // offlinePartitions: offlinePartitions.data.data.result[0].value[1],

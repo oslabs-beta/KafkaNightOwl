@@ -12,7 +12,7 @@ type AppProps = {};
 const App: React.FC<AppProps> = (): ReactElement => {
 	const [tab, setTab] = useState<string>('');
 	const [server, setServer] = useState<string>('');
-
+	console.log('app server', server)
 	function changeTab(newTab: string) {
 		if (newTab === 'overview') 				setTab('overview')
 		else if (newTab === 'topics') 		setTab('topics')
