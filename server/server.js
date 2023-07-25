@@ -3,11 +3,16 @@ const app = express();
 const port = 5050;
 const path = require('path');
 const metricsRouter = require('./routers/metricsRouter.js');
+const userRouter = require('./routers/userRoutes.js');
 const connectDb = require('./config/dbConnection');
 
 connectDb();
 //Serve static files
 app.use(express.static(path.resolve(__dirname, '../client')));
+
+app.use('/user', userRouter, (req, res) => {
+  return res.sendStatus(200);
+})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

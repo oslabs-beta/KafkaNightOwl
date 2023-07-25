@@ -1,4 +1,5 @@
 import { useState, ReactElement } from 'react';
+import {Routes, Route} from 'react-router-dom';
 import Tabs from './Tabs';
 import Sidebar from './Sidebar';
 import Overview from './Overview';
@@ -6,6 +7,9 @@ import Topics from './Topics';
 import Brokers from './Brokers';
 import Producers from './Producers';
 import Consumers from './Consumers';
+import Login from './Login';
+import Signup from './Signup';
+import Homepage from './Homepage';
 
 type AppProps = {};
 
@@ -23,6 +27,12 @@ const App: React.FC<AppProps> = (): ReactElement => {
 
 	return (
 		<>
+		<div>
+		{/* <Routes>
+			<Route path='/login' element = {<Login />} />
+			<Route path='/signup' element = {<Signup />} />
+			<Route path='/' element = {<Homepage />} />
+		</Routes> */}
 			<div className='flex h-screen w-auto'>
 				<Sidebar />
 				<div className='w-screen'>
@@ -33,6 +43,7 @@ const App: React.FC<AppProps> = (): ReactElement => {
 					{tab === 'producers' && <Producers />}
 					{tab === 'consumers' && <Consumers />}
 				</div>
+			</div>
 			</div>
 		</>
 	);
