@@ -14,38 +14,67 @@ type OverviewProps = {
 };
 
 const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
-  const [overviewData, setOverviewData] = useState(null);
-  console.log(overviewData)
-  if (server !== '') {
+  const [overviewData, setOverviewData] = useState({
+    activeControllers: [[null, null]],
+    underRepPartitions: [[null, null]],
+    activebrokers: [[null, null]],
+    offlinePartitions: [[null, null]],
+    totalTopics: [[null, null]],
+    totalPartitions: [[null, null]],
+  });
+  // const [activeControllers, setActiveControllers] = useState([[11111111, 'N/A']]);
+  // const [activeControllers, setActiveControllers] = useState([[11111111, 'N/A']]);
+  // const [activeControllers, setActiveControllers] = useState([[11111111, 'N/A']]);
+  // const [activeControllers, setActiveControllers] = useState([[11111111, 'N/A']]);
+  // const [activeControllers, setActiveControllers] = useState([[11111111, 'N/A']]);
+  // const [activeControllers, setActiveControllers] = useState([[11111111, 'N/A']]);
+  console.log('line 18: ', overviewData)
+  
     useEffect(() => {
+      if (server !== '') {
       const fetchData = async () => {
         const response = await axios.post("http://localhost:5050/jmx/coreMetrics", {
           port: server,
         })
-        setOverviewData(response.data)
+        setOverviewData(response.data);
+        console.log('fetchedData: ', response.data);
       }
       fetchData()
-      console.log('server', server)
+      console.log('server: ', server)
       const interval = setInterval(fetchData, 5000);
       return () => clearInterval(interval);
-    }, [])
-  }
+    } 
+    }, [server])
+  //end of if statement
 
   //  ------ chartjs react tutorial ------
   // const [userData, setUserData] = useState()
   const userData = {
-    labels: [1, 2, 3],
+    labels:[1690038000,1690038015,1690038030],
     datasets: [
       {
         label: "HI",
-        data: [100, 101, 102],
+        data: ["2","1","1"],
       },
     ],
   };
 
+
+  // if(overviewData === null){
+  //   return (
+  //     <div>
+  //       Give us your port number to see your data.
+  //     </div>
+  //   )
+  // }else{
   return (
     <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
-      <LineChart userData={userData} />
+      <div id="activeControllerMetricContainer"> {overviewData.activeControllers[0][1]}</div>
+      <div id="underRepPartitionsMetricContainer">{overviewData.underRepPartitions[0][1]}</div>
+      <div id="activebrokersMetricContainer">{overviewData.activebrokers[0][1]}</div>
+      <div id="offlinePartitionsMetricContainer">{overviewData.offlinePartitions[0][1]}</div>
+      <div id="totalTopicsMetricContainer">{overviewData.totalTopics[0][1]}</div>
+      <div id="totalPartitionsMetricContainer">{overviewData.totalPartitions[0][1]}</div>
     </div>
   );
 };
