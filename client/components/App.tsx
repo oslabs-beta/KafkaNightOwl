@@ -10,7 +10,7 @@ import Consumers from './Consumers';
 type AppProps = {};
 
 const App: React.FC<AppProps> = (): ReactElement => {
-	const [tab, setTab] = useState<string>('overview');
+	const [tab, setTab] = useState<string>('');
 	const [server, setServer] = useState<string>('');
 
 	function changeTab(newTab: string) {
@@ -22,7 +22,6 @@ const App: React.FC<AppProps> = (): ReactElement => {
 	}
 	// function serverInput()
 	const serverInput=(serverString: string)=>{
-		console.log('Made it to App.tsx', serverString);
 		if(!serverString) return console.error('Please input Port num');
 		setServer(serverString);
 	}

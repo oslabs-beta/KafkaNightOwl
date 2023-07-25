@@ -9,7 +9,6 @@ const Sidebar: React.FC<SidebarProps> = ({serverInput}): ReactElement => {
   const [formInput, setFormInput] = useState<string>('');
   
   const postPrServer = () =>{
-    console.log('from Sidebar.tsx',formInput);
     serverInput(formInput);
   }
 

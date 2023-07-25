@@ -10,7 +10,6 @@ router.post(
   '/coreMetrics', 
   metricsController.getCoreMetrics, 
   (req, res) => {
-  console.log('getCoreMetrics ping!')
   res.status(200).json(res.locals.coreMetrics);
   }
 );
