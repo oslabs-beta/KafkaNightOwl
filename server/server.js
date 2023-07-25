@@ -4,14 +4,18 @@ const port = 5050;
 const cors = require('cors')
 const path = require("path");
 const metricsRouter = require("./routers/metricsRouter.js");
-// const connectDb = require('./config/dbConnection');
-console.log("in the server!");
-// connectDb();
-//Serve static files
+const userRouter = require('./routers/userRoutes.js');
+const connectDb = require('./config/dbConnection');
+
 app.use(cors())
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, "../client")));
+connectDb();
+//Serve static files
+app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
+
+console.log("in the server!");
+app.use('/user', userRouter);
 app.use("/jmx", metricsRouter);
 
 app.get("/", (req, res) => {
