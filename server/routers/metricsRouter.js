@@ -1,5 +1,5 @@
 const express = require('express');
-const metricsController = require('../controllers/metricsController.js');
+const metricsController = require('../controllers/metricsController');
 const router = express.Router();
 
 // POST request to metrics endpoint

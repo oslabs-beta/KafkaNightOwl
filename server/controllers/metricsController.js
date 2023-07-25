@@ -11,13 +11,17 @@ const axios = require("axios");
 const metricsController = {
   async getCoreMetrics(req, res, next) {
     const { port } = req.body;
+    const now = Math.floor((Date.now() / 1000));
+    const then = now - 120;
+
     try {
       // const activeController = await axios.get(
-      //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount[1m]`
-      // );
-      const activeControllers = await axios.get(
-        `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_value{name="ActiveControllerCount",}[1m]`
-      );
+        //   `http://${port}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount[1m]`
+        // );
+        const activeControllers = await axios.get(
+          `http://${port}/api/v1/query?query=kafka_controller_KafkaController_Value{name="ActiveControllerCount",}[1m]`
+        );
+      console.log(activeControllers.data)
       // const underRepPartitions = await axios.get(
       //   `http://${port}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions[1m]`
       // );
@@ -52,18 +56,18 @@ const metricsController = {
       //   `http://${broker}/api/v1/query?query=sum(rate(kafka_network_requestmetrics_totaltimems{}[1m]) - rate(kafka_network_requestmetrics_localtimems{}[1m]))`
       // );
       res.locals.coreMetrics = {
-        activeControllers: activeControllers.data.data.result[0].values,
-        underRepPartitions: underRepPartitions.data.data.result[0].values,
-        activebrokers: activebrokers.data.data.result[0].values,
-        offlinePartitions: offlinePartitions.data.data.result[0].values,
-        totalTopics: totalTopics.data.data.result[0].values,
-        totalPartitions: totalPartitions.data.data.result[0].values,
-        // activeController: activeController.data.data.result[0].value[1],
-        // underRepPartitions: underRepPartitions.data.data.result[0].value[1],
-        // offlinePartitions: offlinePartitions.data.data.result[0].value[1],
-        // cpuMetric: cpuMetric.data.data.result[0].value[1],
-        // ramUsage: ramUsage.data.data.result[0].value[1],
-        // latency: latency.data.data.result[0].value[1],
+        activeControllers: activeControllers.data.data.result,
+        underRepPartitions: underRepPartitions.data.data.result,
+        activebrokers: activebrokers.data.data.result,
+        offlinePartitions: offlinePartitions.data.data.result,
+        totalTopics: totalTopics.data.data.result,
+        totalPartitions: totalPartitions.data.data.result,
+        // // activeController: activeController.data.data.result[0].value[1],
+        // // underRepPartitions: underRepPartitions.data.data.result[0].value[1],
+        // // offlinePartitions: offlinePartitions.data.data.result[0].value[1],
+        // // cpuMetric: cpuMetric.data.data.result[0].value[1],
+        // // ramUsage: ramUsage.data.data.result[0].value[1],
+        // // latency: latency.data.data.result[0].value[1],
       };
       return next();
     } catch (err) {

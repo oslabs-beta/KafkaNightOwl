@@ -6,20 +6,31 @@ import data from "../../data.json";
 import React from "react";
 import { Chart as Chartjs } from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import axios from "axios";
 Chartjs.register(CategoryScale);
 
-type OverviewProps = {};
+type OverviewProps = {
+  server: string;
+};
 
-const Overview: React.FC<OverviewProps> = (): ReactElement => {
-  const DELAY_IN_MS = 15000;
-  console.log(data);
+const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
+  const [overviewData, setOverviewData] = useState(null);
+  console.log(overviewData)
+  if (server !== '') {
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await axios.post("http://localhost:5050/jmx/coreMetrics", {
+          port: server,
+        })
+        setOverviewData(response.data)
+      }
+      fetchData()
+      console.log('server', server)
+      const interval = setInterval(fetchData, 5000);
+      return () => clearInterval(interval);
+    }, [])
+  }
 
-  useEffect(() => {
-    const interval: NodeJS.Timer = setInterval(() => {
-      // fetch goes here
-    }, DELAY_IN_MS);
-    return () => clearInterval(interval);
-  });
   //  ------ chartjs react tutorial ------
   // const [userData, setUserData] = useState()
   const userData = {
@@ -33,17 +44,9 @@ const Overview: React.FC<OverviewProps> = (): ReactElement => {
   };
 
   return (
-    <>
-      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
-        <LineChart userData={userData} />
-        {/* <Chart title={'dummyChart'} /> */}
-        {/* <Chart title={"partitions / sec"} data={userData} />
-        <Chart title={"segments / sec"} />
-        <Chart title={"consumer requests / sec"} /> */}
-        {/* <iframe src="http://localhost:3000/d-solo/ba969e29-7865-45e0-908e-24dd50317420/kafka-messagein?orgId=1&refresh=5s&panelId=1" width="450" height="200" frameBorder="0"></iframe>
-        <iframe src="http://localhost:3000/d-solo/ba969e29-7865-45e0-908e-24dd50317420/kafka-messagein?orgId=1&refresh=5s&from=1689870391933&panelId=1" width="450" height="200" frameBorder="0"></iframe> */}
-      </div>
-    </>
+    <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
+      <LineChart userData={userData} />
+    </div>
   );
 };
 
