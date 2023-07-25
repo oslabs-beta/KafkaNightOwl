@@ -16,20 +16,22 @@ type OverviewProps = {
 const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
   const [overviewData, setOverviewData] = useState(null);
   console.log(overviewData)
-  if (server !== '') {
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await axios.post("http://localhost:5050/jmx/coreMetrics", {
-          port: server,
-        })
-        setOverviewData(response.data)
-      }
-      fetchData()
-      console.log('server', server)
-      const interval = setInterval(fetchData, 5000);
-      return () => clearInterval(interval);
-    }, [])
-  }
+
+  
+  useEffect(() => {
+    console.log('useEffect', server)
+    if (!server) return undefined
+    const fetchData = async () => {
+      const response = await axios.post("http://localhost:5050/jmx/coreMetrics", {
+        port: server,
+      })
+      setOverviewData(response.data)
+    }
+    fetchData();
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
+  }, [])
+  
 
   //  ------ chartjs react tutorial ------
   // const [userData, setUserData] = useState()
