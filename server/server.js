@@ -16,6 +16,8 @@ app.use(express.static(path.resolve(__dirname, "../client")));
 app.use(express.urlencoded({ extended: true }));
 app.use("/jmx", metricsRouter);
 
+app.use('/user', userRouter);
+
 app.get("/", (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, "../index.html"));
 });
