@@ -1,19 +1,26 @@
-import { useNavigate } from "react-router";
+import React, {useState} from 'react'
+import Signup from "./Signup";
+import Login from './Login';
 
-const Homepage = () => {
+const Homepage = ({setLoggedIn}) => {
 
-    const navigate = useNavigate();
-    const navigateToLogin = () => {
-        navigate('/login');
+    // const navigate = useNavigate();
+    // const navigateToLogin = () => {
+    //     navigate('/login');
+    // }
+    // const navigateToSignup = () => {
+    //     navigate('/signup');
+    // }
+    const [signupButtonClicked, setSignupButtonClicked] = useState(false);
+
+    const openSignUp = (e) => {
+        e.preventDefault()
+        setSignupButtonClicked(prevState => !prevState)
+        console.log('signup form opened');
     }
-    const navigateToSignup = () => {
-        navigate('/signup');
-    }
-
     return (
         <>
-            <button onClick={navigateToLogin}>Login</button>
-            <button onClick={navigateToSignup}>Signup</button>
+            {signupButtonClicked ? <Signup setLoggedIn={setLoggedIn}/> : <Login setLoggedIn={setLoggedIn} openSignUp={openSignUp} />}
         </>
     );
 };

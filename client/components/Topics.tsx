@@ -1,8 +1,10 @@
 import { ReactElement } from "react";
 
-type TopicsProps = {};
+type TopicsProps = {
+  server: string
+};
 
-const Topics: React.FC<TopicsProps> = (): ReactElement => {
+const Topics: React.FC<TopicsProps> = ({server}): ReactElement => {
   return (
     <>
       <div className=""></div>

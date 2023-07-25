@@ -6,17 +6,17 @@ const path = require("path");
 const metricsRouter = require("./routers/metricsRouter.js");
 const userRouter = require('./routers/userRoutes.js');
 const connectDb = require('./config/dbConnection');
-console.log("in the server!");
+
+app.use(cors())
+app.use(express.json());
 connectDb();
 //Serve static files
 app.use(express.static(path.resolve(__dirname, '../client')));
-
-app.use(express.json());
-app.use(express.static(path.resolve(__dirname, "../client")));
 app.use(express.urlencoded({ extended: true }));
-app.use("/jmx", metricsRouter);
 
+console.log("in the server!");
 app.use('/user', userRouter);
+app.use("/jmx", metricsRouter);
 
 app.get("/", (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, "../index.html"));

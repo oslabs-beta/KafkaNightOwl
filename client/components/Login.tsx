@@ -1,25 +1,26 @@
 import * as React from "react";
 import { ReactElement, useState } from "react";
-import {useNavigate} from "react-router";
+import axios from "axios";
 
-type LoginTypes = {};
 
-const Login: React.FC<LoginTypes> = (): ReactElement => {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState<string>('');
+type LoginTypes = {
+  setLoggedIn: (newState: boolean) => void
+  openSignUp: (e: any) => void
+};
+
+const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement => {
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const obj = {username, password};
-    fetch('/user/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(obj),
-    }).then((res) => {
-      if(res.ok) {
-        navigate('/');
-      }
+    const userData = { email, password };
+    console.log('user', userData)
+    axios.post('http://localhost:5050/user/login', userData)
+      .then((res) => {
+        console.log(res)
+      console.log('success!')
+      setLoggedIn(true);
     });
   };
 
@@ -32,43 +33,25 @@ const Login: React.FC<LoginTypes> = (): ReactElement => {
                 <label className="label">
                     <span className="text-base label-text">Email</span>
                 </label>
-                <input type="text" placeholder="Email Address" className="w-full input input-bordered" />
+                <input type="text" placeholder="Email Address" className="w-full input input-bordered" onChange={(e) => setEmail(e.target.value)} value={email}/>
             </div>
             <div>
                 <label className="label">
                     <span className="text-base label-text">Password</span>
                 </label>
-                <input type="password" placeholder="Enter Password"
+                <input type="password" placeholder="Enter Password" onChange={e=>setPassword(e.target.value)} value={password}
                     className="w-full input input-bordered" />
             </div>
             <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forgot Password?</a>
             <div>
-                <button className="btn btn-block">Login</button>
+                <button className="btn btn-block" onClick={(e) => handleSubmit(e)}>Login</button>
+            </div>
+            <div>
+              <button className="btn btn-block" onClick={e => openSignUp(e)}>Don't have an account? Sign up here</button>
             </div>
         </form>
     </div>
 </div>
-    
-    // <>
-    //   <h2>Log In</h2>
-    //   <form onSubmit={handleSubmit}>
-    //     <input
-    //       onChange={(e) => setUsername(e.target.value)}
-    //       value={username}
-    //       name='username'
-    //       type='text'
-    //       placeholder='Username'
-    //     ></input>
-    //     <input
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       value={password}
-    //       name='password'
-    //       type='password'
-    //       placeholder='Password'
-    //     ></input>
-    //     <input type='submit' value='Log In'></input>
-    //   </form>
-    // </>
   );
 };
 
