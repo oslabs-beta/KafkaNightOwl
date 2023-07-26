@@ -48,25 +48,25 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
   //  ------ chartjs react tutorial ------
   // const [userData, setUserData] = useState()
   if (topicData) {
-    // const totalMessageInData = {
-    //   labels: organizeData(topicData.totalMessageIn).time,
-    //   datasets: [
-    //     {
-    //       label: "TotalMessageIn",
-    //       data: organizeData(topicData.totalMessageIn).value,
-    //     }
-    //   ],
-    // };
+    const totalMessageInData = {
+      labels: organizeData(topicData.totalMessageIn).time,
+      datasets: [
+        {
+          label: "TotalMessageIn",
+          data: organizeData(topicData.totalMessageIn).value,
+        }
+      ],
+    };
 
-    // const messageInRateData = {
-    //   labels: organizeData(topicData.messageInRate).time,
-    //   datasets: [
-    //     {
-    //       label: "MessageInRate",
-    //       data: organizeData(topicData.messageInRate).value,
-    //     }
-    //   ],
-    // };
+    const messageInRateData = {
+      labels: organizeData(topicData.messageInRate).time,
+      datasets: [
+        {
+          label: "MessageInRate",
+          data: organizeData(topicData.messageInRate).value,
+        }
+      ],
+    };
 
     const bytesInRateData = {
       labels: organizeData(topicData.bytesInRate).time,
@@ -78,25 +78,25 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
       ],
     };
 
-    // const bytesOutRateData = {
-    //   labels: organizeData(topicData.bytesOutRate).time,
-    //   datasets: [
-    //     {
-    //       label: "bytesOutRate",
-    //       data: organizeData(topicData.bytesOutRate).value,
-    //     }
-    //   ],
-    // };
+    const bytesOutRateData = {
+      labels: organizeData(topicData.bytesOutRate).time,
+      datasets: [
+        {
+          label: "bytesOutRate",
+          data: organizeData(topicData.bytesOutRate).value,
+        }
+      ],
+    };
 
-    // const produceRequestRateData = {
-    //   labels: organizeData(topicData.produceRequestRate).time,
-    //   datasets: [
-    //     {
-    //       label: "producerRequestRate",
-    //       data: organizeData(topicData.produceRequestRate).value,
-    //     }
-    //   ],
-    // };
+    const produceRequestRateData = {
+      labels: organizeData(topicData.produceRequestRate).time,
+      datasets: [
+        {
+          label: "producerRequestRate",
+          data: organizeData(topicData.produceRequestRate).value,
+        }
+      ],
+    };
 
 
 
@@ -155,7 +155,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
           BytesIn Rate:
           {topicData && <Line data={bytesInRateData} height={1} width={2} />}
         </div>
-        {/* <div className="h-60 w-60">
+        <div className="h-60 w-60">
           BytesOut Rate:
           {topicData && <Line data={bytesOutRateData} height={2} width={2} />}
         </div>
@@ -170,7 +170,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
         <div className="h-60 w-60">
           Produce Request Rate:
           {topicData && <Line data={produceRequestRateData} height={1} width={2} />}
-        </div> */}
+        </div>
       </>
     );
     // </>
