@@ -32,7 +32,8 @@ const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
       const response = await axios.post("http://localhost:5050/jmx/coreMetrics", {
         port: server,
       })
-      setOverviewData(response.data)
+      setOverviewData(response.data);
+      console.log(overviewData);
     }
     fetchData();
     const interval = setInterval(fetchData, 5000);

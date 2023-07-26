@@ -24,23 +24,24 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
         }
       );
       setTopicData(response.data);
+      console.log(topicData);
     };
     fetchData();
     const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  // const organizeData = (array) => {
-  //   const data = {
-  //     time: [],
-  //     value: [],
-  //   }
-  //   array.forEach(el => {
-  //     data.time.push(el[0]);
-  //     data.value.push(el[1]);
-  //   })
-  //   return data;
-  // }
+  const organizeData = (array) => {
+    const data = {
+      time: [],
+      value: [],
+    }
+    array.forEach(el => {
+      data.time.push(el[0]);
+      data.value.push(el[1]);
+    })
+    return data;
+  }
 
 
 
@@ -67,15 +68,15 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
     //   ],
     // };
 
-    // const bytesInRateData = {
-    //   labels: organizeData(topicData.bytesInRate).time,
-    //   datasets: [
-    //     {
-    //       label: "bytesInRate",
-    //       data: organizeData(topicData.bytesInRate).value,
-    //     }
-    //   ],
-    // };
+    const bytesInRateData = {
+      labels: organizeData(topicData.bytesInRate).time,
+      datasets: [
+        {
+          label: "bytesInRate",
+          data: organizeData(topicData.bytesInRate).value,
+        }
+      ],
+    };
 
     // const bytesOutRateData = {
     //   labels: organizeData(topicData.bytesOutRate).time,
@@ -99,41 +100,41 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
 
 
 
-    const bytesInRateData = {
-      labels: [
-        topicData.bytesInRate[0][0],
-        topicData.bytesInRate[1][0],
-        topicData.bytesInRate[2][0],
-        topicData.bytesInRate[3][0],
-        topicData.bytesInRate[4][0],
-        topicData.bytesInRate[5][0],
-        topicData.bytesInRate[6][0],
-        topicData.bytesInRate[7][0],
-        topicData.bytesInRate[8][0],
-        topicData.bytesInRate[9][0],
-        topicData.bytesInRate[10][0],
-        topicData.bytesInRate[11][0],
-      ],
-      datasets: [
-        {
-          label: "bytesIN",
-          data: [
-            topicData.bytesInRate[0][1],
-            topicData.bytesInRate[1][1],
-            topicData.bytesInRate[2][1],
-            topicData.bytesInRate[3][1],
-            topicData.bytesInRate[4][1],
-            topicData.bytesInRate[5][1],
-            topicData.bytesInRate[6][1],
-            topicData.bytesInRate[7][1],
-            topicData.bytesInRate[8][1],
-            topicData.bytesInRate[9][1],
-            topicData.bytesInRate[10][1],
-            topicData.bytesInRate[11][1],
-          ],
-        },
-      ],
-    };
+    // const bytesInRateData = {
+    //   labels: [
+    //     topicData.bytesInRate[0][0],
+    //     topicData.bytesInRate[1][0],
+    //     topicData.bytesInRate[2][0],
+    //     topicData.bytesInRate[3][0],
+    //     // topicData.bytesInRate[4][0],
+    //     // topicData.bytesInRate[5][0],
+    //     // topicData.bytesInRate[6][0],
+    //     // topicData.bytesInRate[7][0],
+    //     // topicData.bytesInRate[8][0],
+    //     // topicData.bytesInRate[9][0],
+    //     // topicData.bytesInRate[10][0],
+    //     // topicData.bytesInRate[11][0],
+    //   ],
+    //   datasets: [
+    //     {
+    //       label: "bytesIN",
+    //       data: [
+    //         topicData.bytesInRate[0][1],
+    //         topicData.bytesInRate[1][1],
+    //         topicData.bytesInRate[2][1],
+    //         topicData.bytesInRate[3][1],
+    //         // topicData.bytesInRate[4][1],
+    //         // topicData.bytesInRate[5][1],
+    //         // topicData.bytesInRate[6][1],
+    //         // topicData.bytesInRate[7][1],
+    //         // topicData.bytesInRate[8][1],
+    //         // topicData.bytesInRate[9][1],
+    //         // topicData.bytesInRate[10][1],
+    //         // topicData.bytesInRate[11][1],
+    //       ],
+    //     },
+    //   ],
+    // };
     const sampleData = {
       labels: [1690038000, 1690038015, 1690038030],
       datasets: [
