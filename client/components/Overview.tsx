@@ -42,14 +42,36 @@ const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
   
 
   return (
-    <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
-      <div id="activeControllerMetricContainer">{overviewData.activeControllers[0][1]}</div>
-      <div id="underRepPartitionsMetricContainer">{overviewData.underRepPartitions[0][1]}</div>
-      <div id="activebrokersMetricContainer">{overviewData.activebrokers[0][1]}</div>
-      <div id="offlinePartitionsMetricContainer">{overviewData.offlinePartitions[0][1]}</div>
-      <div id="totalTopicsMetricContainer">{overviewData.totalTopics[0][1]}</div>
-      <div id="totalPartitionsMetricContainer">{overviewData.totalPartitions[0][1]}</div>
-    </div>
+    <>
+      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
+        <div className="flex flex-col justify-content text-9xl w-48 h-60 rounded-xl border-2 border-black justify-center text-center">
+          <div>{overviewData.activeControllers[0][1]}</div>
+          <span className="text-base mb-4">active controllers</span>
+        </div>
+        <div className="flex flex-col justify-content text-9xl w-48 h-60 rounded-xl border-2 border-black justify-center text-center">
+          <div>{overviewData.underRepPartitions[0][1]}</div>
+          <span className="text-base mb-4">under rep partitions</span>
+        </div>
+        <div className="flex flex-col justify-content text-9xl w-48 h-60 rounded-xl border-2 border-black justify-center text-center">
+          <div>{overviewData.activebrokers[0][1]}</div>
+          <span className="text-base mb-4">active brokers</span>
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
+        <div className="flex flex-col justify-content text-9xl w-48 h-60 rounded-xl border-2 border-black justify-center text-center">
+          <div>{overviewData.offlinePartitions[0][1]}</div>
+          <span className="text-base mb-4">offline partitions</span>
+        </div>
+        <div className="flex flex-col justify-content text-9xl w-48 h-60 rounded-xl border-2 border-black justify-center text-center">
+          <div>{overviewData.totalTopics[0][1]}</div>
+          <span className="text-base mb-4">total topics</span>
+        </div>
+        <div className="flex flex-col justify-content text-9xl w-48 h-60 rounded-xl border-2 border-black justify-center text-center">
+          <div>{overviewData.totalPartitions[0][1]}</div>
+          <span className="text-base mb-4">total partitions</span>
+        </div>
+      </div>
+    </>
   );
 };
 

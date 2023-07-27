@@ -79,25 +79,25 @@ const Brokers: React.FC<BrokersProps> = ({server}): ReactElement => {
     };
 
     return (
-      <>
+      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
         {/* {topicData ? <div>Loading</div> : (<> */}
-        <div className="h-60 w-60">
+        <div className=" w-[500px] h-[300px]">
           Total Topics:
-          {brokerData && <Line data={totalTopicsData} height={2} width={2} />}
+          {brokerData && <Line data={totalTopicsData}/>}
         </div>
-        <div className="h-60 w-60">
+        <div className=" w-[500px] h-[300px]">
           MessageIn Rate:
-          {brokerData && <Line data={messageInRateData} height={2} width={2} />}
+          {brokerData && <Line data={messageInRateData}/>}
         </div>
-        <div className="h-60 w-60">
+        <div className=" w-[500px] h-[300px]">
           BytesIn Rate:
-          {brokerData && <Line data={bytesInRateData} height={2} width={2} />}
+          {brokerData && <Line data={bytesInRateData}/>}
         </div>
-        <div className="h-60 w-60">
+        <div className=" w-[500px] h-[300px]">
           BytesOut Rate:
-          {brokerData && <Line data={bytesOutRateData} height={2} width={2} />}
+          {brokerData && <Line data={bytesOutRateData}/>}
         </div>
-      </>
+      </div>
     );
 
     } else {

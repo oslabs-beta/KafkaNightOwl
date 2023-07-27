@@ -9,6 +9,7 @@ type TopicsProps = {
 };
 
 const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [topicData, setTopicData] = useState(null);
   console.log(topicData);
 
@@ -30,7 +31,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
     const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
   }, []);
-
+ 
   const organizeData = (array) => {
     const data = {
       time: [],
@@ -99,29 +100,29 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
     };
 
     return (
-      <>
+      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
         {/* {topicData ? <div>Loading</div> : (<> */}
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           BytesIn Rate:
-          {topicData && <Line data={bytesInRateData} height={2} width={2} />}
+          {topicData && <Line data={bytesInRateData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           BytesOut Rate:
-          {topicData && <Line data={bytesOutRateData} height={2} width={2} />}
+          {topicData && <Line data={bytesOutRateData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           MessageIn Rate:
-          {topicData && <Line data={messageInRateData} height={2} width={2} />}
+          {topicData && <Line data={messageInRateData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           Total MessageIn:
-          {topicData && <Line data={totalMessageInData} height={2} width={2} />}
+          {topicData && <Line data={totalMessageInData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           Produce Request Rate:
-          {topicData && <Line data={produceRequestRateData} height={2} width={2} />}
+          {topicData && <Line data={produceRequestRateData} />}
         </div>
-      </>
+      </div>
     );
     // </>
     // );

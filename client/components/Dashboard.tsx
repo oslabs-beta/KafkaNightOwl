@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import Overview from './Overview';
 import Topics from './Topics';
 import Brokers from './Brokers';
+import Landing from './Landing'
 
 type DashboardProps = {};
 
@@ -21,7 +22,7 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
     if (!server) return undefined;
 		if (newTab === 'overview') 				setTab('overview')
 		else if (newTab === 'topics') 		setTab('topics')
-		else if (newTab === 'brokers') 		setTab('brokers')
+		else if (newTab === 'brokers') setTab('brokers')
   }
   
 	return (
@@ -32,7 +33,8 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 				<Tabs changeTab={changeTab} tab={tab} />
 					{tab === 'overview' && <Overview server={server}/>}
           {tab === 'topics' && <Topics server={server} />}
-          {tab === 'brokers' && <Brokers server={server} />}
+					{tab === 'brokers' && <Brokers server={server} />}
+					{tab === '' && <Landing />}
 				</div>
 			</div>
 		</>
