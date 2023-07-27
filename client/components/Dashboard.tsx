@@ -29,8 +29,8 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 		<>
 			<div className='flex h-screen w-auto'>
 				<Sidebar updateServer={updateServer}/>
-				<div className='w-screen'>
-				<Tabs changeTab={changeTab} tab={tab} />
+				<div className='w-screen flex flex-col items-center content-center'>
+					<Tabs changeTab={changeTab} tab={tab} />
 					{tab === 'overview' && <Overview server={server}/>}
           {tab === 'topics' && <Topics server={server} />}
 					{tab === 'brokers' && <Brokers server={server} />}

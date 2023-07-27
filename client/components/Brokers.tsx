@@ -79,7 +79,7 @@ const Brokers: React.FC<BrokersProps> = ({server}): ReactElement => {
     };
 
     return (
-      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
+      <div className="flex flex-wrap gap-8 justify-center content-center mt-12 max-w-[1100px]">
         {/* {topicData ? <div>Loading</div> : (<> */}
         <div className=" w-[500px] h-[300px]">
           Total Topics:

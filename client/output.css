@@ -1658,6 +1658,10 @@ html {
   height: 60%;
 }
 
+.h-\[900px\] {
+  height: 900px;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -1728,6 +1732,34 @@ html {
 
 .w-\[425px\] {
   width: 425px;
+}
+
+.w-\[1300px\] {
+  width: 1300px;
+}
+
+.w-\[1400px\] {
+  width: 1400px;
+}
+
+.w-\[1500px\] {
+  width: 1500px;
+}
+
+.w-\[1200px\] {
+  width: 1200px;
+}
+
+.max-w-\[1400px\] {
+  max-width: 1400px;
+}
+
+.max-w-\[1200px\] {
+  max-width: 1200px;
+}
+
+.max-w-\[1100px\] {
+  max-width: 1100px;
 }
 
 .flex-col {
@@ -1924,6 +1956,11 @@ html {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .shadow-md {

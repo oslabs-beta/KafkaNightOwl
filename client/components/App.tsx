@@ -10,8 +10,8 @@ const App: React.FC<AppProps> = (): ReactElement => {
 
 	return (
     <>
-      <Dashboard />
-			{/* {isLoggedIn ? <Dashboard /> : <Homepage setLoggedIn={setLoggedIn} />} */}
+      {/* <Dashboard /> */}
+			{isLoggedIn ? <Dashboard /> : <Homepage setLoggedIn={setLoggedIn} />}
     </>
   );
 }

@@ -100,7 +100,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
     };
 
     return (
-      <div className="flex flex-wrap gap-8 justify-center content-center mt-12">
+      <div className="flex flex-wrap gap-8 mt-12 max-w-[1400px]">
         {/* {topicData ? <div>Loading</div> : (<> */}
         <div className="w-[425px]">
           BytesIn Rate:
