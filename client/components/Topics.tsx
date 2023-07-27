@@ -9,6 +9,7 @@ type TopicsProps = {
 };
 
 const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [topicData, setTopicData] = useState(null);
   console.log(topicData);
 
@@ -30,14 +31,14 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
     const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
   }, []);
-
+ 
   const organizeData = (array) => {
     const data = {
       time: [],
       value: [],
     }
     array.forEach(el => {
-      data.time.push(el[0]);
+      data.time.push(new Date(el[0]*1000).toLocaleTimeString());
       data.value.push(el[1]);
     })
     return data;
@@ -52,7 +53,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
       labels: organizeData(topicData.totalMessageIn).time,
       datasets: [
         {
-          label: "TotalMessageIn",
+          label: "Message counts",
           data: organizeData(topicData.totalMessageIn).value,
         }
       ],
@@ -62,7 +63,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
       labels: organizeData(topicData.messageInRate).time,
       datasets: [
         {
-          label: "MessageInRate",
+          label: "Messages/sec",
           data: organizeData(topicData.messageInRate).value,
         }
       ],
@@ -72,7 +73,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
       labels: organizeData(topicData.bytesInRate).time,
       datasets: [
         {
-          label: "bytesInRate",
+          label: "Bytes/sec",
           data: organizeData(topicData.bytesInRate).value,
         }
       ],
@@ -82,7 +83,7 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
       labels: organizeData(topicData.bytesOutRate).time,
       datasets: [
         {
-          label: "bytesOutRate",
+          label: "Bytes/sec",
           data: organizeData(topicData.bytesOutRate).value,
         }
       ],
@@ -92,86 +93,36 @@ const Topics: React.FC<TopicsProps> = ({ server }): ReactElement => {
       labels: organizeData(topicData.produceRequestRate).time,
       datasets: [
         {
-          label: "producerRequestRate",
+          label: "Request/sec",
           data: organizeData(topicData.produceRequestRate).value,
         }
       ],
     };
 
-
-
-    // const bytesInRateData = {
-    //   labels: [
-    //     topicData.bytesInRate[0][0],
-    //     topicData.bytesInRate[1][0],
-    //     topicData.bytesInRate[2][0],
-    //     topicData.bytesInRate[3][0],
-    //     // topicData.bytesInRate[4][0],
-    //     // topicData.bytesInRate[5][0],
-    //     // topicData.bytesInRate[6][0],
-    //     // topicData.bytesInRate[7][0],
-    //     // topicData.bytesInRate[8][0],
-    //     // topicData.bytesInRate[9][0],
-    //     // topicData.bytesInRate[10][0],
-    //     // topicData.bytesInRate[11][0],
-    //   ],
-    //   datasets: [
-    //     {
-    //       label: "bytesIN",
-    //       data: [
-    //         topicData.bytesInRate[0][1],
-    //         topicData.bytesInRate[1][1],
-    //         topicData.bytesInRate[2][1],
-    //         topicData.bytesInRate[3][1],
-    //         // topicData.bytesInRate[4][1],
-    //         // topicData.bytesInRate[5][1],
-    //         // topicData.bytesInRate[6][1],
-    //         // topicData.bytesInRate[7][1],
-    //         // topicData.bytesInRate[8][1],
-    //         // topicData.bytesInRate[9][1],
-    //         // topicData.bytesInRate[10][1],
-    //         // topicData.bytesInRate[11][1],
-    //       ],
-    //     },
-    //   ],
-    // };
-    const sampleData = {
-      labels: [1690038000, 1690038015, 1690038030],
-      datasets: [
-        {
-          label: "HI",
-          data: ["2", "1", "1"],
-        },
-      ],
-    };
     return (
-      <>
+      <div className="flex flex-wrap gap-8 mt-12 max-w-[1400px]">
         {/* {topicData ? <div>Loading</div> : (<> */}
-        <div className="h-60 w-60">
-          Sample Data:
-          {topicData && <Line data={sampleData} height={1} width={2} />}
-        </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           BytesIn Rate:
-          {topicData && <Line data={bytesInRateData} height={1} width={2} />}
+          {topicData && <Line data={bytesInRateData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           BytesOut Rate:
-          {topicData && <Line data={bytesOutRateData} height={2} width={2} />}
+          {topicData && <Line data={bytesOutRateData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           MessageIn Rate:
-          {topicData && <Line data={messageInRateData} height={1} width={2} />}
+          {topicData && <Line data={messageInRateData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           Total MessageIn:
-          {topicData && <Line data={totalMessageInData} height={1} width={2} />}
+          {topicData && <Line data={totalMessageInData} />}
         </div>
-        <div className="h-60 w-60">
+        <div className="w-[425px]">
           Produce Request Rate:
-          {topicData && <Line data={produceRequestRateData} height={1} width={2} />}
+          {topicData && <Line data={produceRequestRateData} />}
         </div>
-      </>
+      </div>
     );
     // </>
     // );

@@ -20,7 +20,7 @@ module.exports = {
     host: "localhost",
     port: "8080",
     proxy: {
-      "/api": "http://localhost:5050",
+      "/": "http://localhost:5050",
     },
     historyApiFallback: true,
     static: {

@@ -11,7 +11,8 @@ app.use(cors())
 app.use(express.json());
 connectDb();
 //Serve static files
-app.use(express.static(path.resolve(__dirname, '../client')));
+// app.use(express.static(path.resolve(__dirname, '../client/image')));
+app.use('/assets', express.static(path.resolve(__dirname, '../client/assets')));
 app.use(express.urlencoded({ extended: true }));
 
 console.log("in the server!");
