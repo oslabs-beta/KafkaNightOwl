@@ -2,13 +2,15 @@ import React, { ReactElement } from "react";
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
+import Chart from "./Chart";
 
 type GridLayoutProps = {
   items: Layout[]
   onLayoutChange: (newLayout: Layout[]) => void
+  server: string
 };
 
-const GridLayout: React.FC<GridLayoutProps> = ({items, onLayoutChange}): ReactElement => {
+const GridLayout: React.FC<GridLayoutProps> = ({items, onLayoutChange, server}): ReactElement => {
   const ResponsiveGridLayout = WidthProvider(Responsive);
   return (
     <div className="w-full h-full overflow-scroll bg-slate-800">
@@ -18,13 +20,14 @@ const GridLayout: React.FC<GridLayoutProps> = ({items, onLayoutChange}): ReactEl
         cols={{ lg: 12 }}
         rowHeight={100}
         measureBeforeMount={true}
+        useCSSTransforms={false}
         layouts={{ lg: items }}
         margin={[5,5]}
         onLayoutChange={onLayoutChange}
       >
         {items.map((item) => (
-          <div key={item.i} className="bg-gray-200 border flex justify-center items-center" data-grid={item}>
-            {item.i}
+          <div key={item.i} className="bg-gray-700 p-2" data-grid={item}>
+            <Chart server={server}/>
           </div>
         ))}
       </ResponsiveGridLayout>
