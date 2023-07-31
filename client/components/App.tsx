@@ -6,7 +6,7 @@ import Homepage from './Homepage';
 type AppProps = {};
 
 const App: React.FC<AppProps> = (): ReactElement => {
-	const [isLoggedIn, setLoggedIn] = useState(false);
+	const [isLoggedIn, setLoggedIn] = useState(true);
 
 	return (
     <>
