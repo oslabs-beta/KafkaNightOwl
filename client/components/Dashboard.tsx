@@ -4,28 +4,32 @@ import { Layout } from 'react-grid-layout';
 import CreateChartForm from './CreateChartForm';
 import AddServerModal from './AddServerModal';
 import GridLayout from './GridLayout';
+import axios from "axios";
+import defaultCoreMetricData from './DefaultData'
 
 type DashboardProps = {};
-type ChartData = {
+type ChartDataType = {
 	layout: Layout,
 	url: {
 		query: string,
 		name: string,
-		topic: string
+		topic?: string
 	}
 }
 
 const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
-	const [server, setServer] = useState<string | null>(null);
+	const [server, setServer] = useState<string | null>('localhost:9090');
 	const [metric, setMetric] = useState<string>('');
 	const [metricList, setMetricList] = useState<string[]>(data.data);
 	const [filteredMetrics, setFilteredMetrics] = useState<string[]>(data.data)
+	const [topicList, setTopicList] = useState<string[]>([])
+	const [topic, setCurrentTopic] = useState<string>('')
 	const [layout, setLayout] = useState<Layout[]>([
-    {i: 'item 1', x: 0, y:0, w:2, h:2, static: false},
-    {i: 'item 2', x: 2, y:2, w:2, h:2, static: false},
-    {i: 'item 3', x: 4, y:4, w:2, h:2, static: false}
+    {i: 'item 1', x: 0, y:0, w:2, h:1, static: false},
+    {i: 'item 2', x: 2, y:2, w:2, h:1, static: false},
+    {i: 'item 3', x: 4, y:4, w:2, h:1, static: false}
 	]);
-	const [chartData, setChartData] = useState<ChartData | null>(null)
+	const [chartData, setChartData] = useState<ChartDataType[] | null>(defaultCoreMetricData)
 
 	const onLayoutChange = (newLayout) => {
 		setLayout(newLayout)
@@ -35,10 +39,29 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 		setLayout((prevLayout: Layout[]): Layout[] => [...prevLayout, chart])
 	}
 
-  const updateServer = (serverString: string): void => {
+  const updateServer = async (serverString: string) => {
 		if(!serverString) return console.error('Please input Port num');
 		setServer(serverString);
+		console.log(server);
+		try {
+			const brokerTopicMetrics = await axios.get(
+				`http://${serverString}/api/v1/query?query=kafka_server_BrokerTopicMetrics_Count{name="MessagesInPerSec"}`
+			);
+			const metricsArray = brokerTopicMetrics.data.data.result;
+			const topics = [];
+			metricsArray.forEach(data => {
+				if (data.metric.topic !== '__consumer_offsets' && !topics.includes(data.metric.topic) && data.metric.topic) topics.push(data.metric.topic);
+			});
+			setTopicList(topics);
+			console.log(topicList);
+		} catch (err) {
+			console.log(err);
+		}
   }
+  // const updateServer = (serverString: string): void => {
+	// 	if(!serverString) return console.error('Please input Port num');
+	// 	setServer(serverString);
+  // }
 
   // TODO: fetch metric list from client
 	useEffect(() => {
@@ -65,7 +88,7 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 						<CreateChartForm server={server} metric={metric} setMetric={setMetric} filteredMetrics={filteredMetrics} addChart={addChart} />
 						<span className='ml-auto text-white w-72 text-2xl font-black'>KAFKA NIGHTOWL</span>
 					</div>
-					<GridLayout server={server} items={layout} onLayoutChange={onLayoutChange} />
+					<GridLayout server={server} items={layout} onLayoutChange={onLayoutChange} chartData={chartData} />
 				</div>
 			</div>
 		</>
