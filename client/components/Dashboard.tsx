@@ -1,40 +1,62 @@
-import { useState, ReactElement } from 'react';
-import Tabs from './Tabs';
-import Sidebar from './Sidebar';
-import Overview from './Overview';
-import Topics from './Topics';
-import Brokers from './Brokers';
-import Landing from './Landing'
+import { useState, useEffect, ReactElement } from 'react';
+import data from '../../data.json'
+import { Layout } from 'react-grid-layout';
+import CreateChartForm from './CreateChartForm';
+import AddServerModal from './AddServerModal';
+import GridLayout from './GridLayout';
 
 type DashboardProps = {};
 
 const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
-  const [tab, setTab] = useState<string>('');
-  const [server, setServer] = useState<string | null>(null);
+	const [server, setServer] = useState<string | null>('localhost:9090');
+	const [metric, setMetric] = useState<string>('');
+	const [metricList, setMetricList] = useState<string[]>(data.data);
+	const [filteredMetrics, setFilteredMetrics] = useState<string[]>(data.data)
+	const [layout, setLayout] = useState<Layout[]>([
+    {i: 'item 1', x: 0, y:0, w:2, h:2, static: false},
+    {i: 'item 2', x: 2, y:2, w:2, h:2, static: false},
+    {i: 'item 3', x: 4, y:4, w:2, h:2, static: false}
+  ]);
+
+	const onLayoutChange = (newLayout) => {
+		setLayout(newLayout)
+	}
+	
+	const addChart = (chart: Layout) => {
+		setLayout((prevLayout: Layout[]): Layout[] => [...prevLayout, chart])
+	}
 
   const updateServer = (serverString: string): void => {
-    console.log('str', serverString)
 		if(!serverString) return console.error('Please input Port num');
 		setServer(serverString);
   }
-  
-  function changeTab(newTab: string): void {
-    if (!server) return undefined;
-		if (newTab === 'overview') 				setTab('overview')
-		else if (newTab === 'topics') 		setTab('topics')
-		else if (newTab === 'brokers') setTab('brokers')
-  }
+
+  // TODO: fetch metric list from client
+	useEffect(() => {
+		if(!server) return undefined
+  }, [server])
+
+	// TODO: add debouncer/limiter to limit rerenders when typing
+  useEffect((): void => {
+    if (!metric) {
+      return setFilteredMetrics(metricList);
+    }
+    const newFilteredMetrics: string[] = metricList
+			.filter((item) => item.toLowerCase().includes(metric.toLowerCase()))
+			.sort()
+    setFilteredMetrics(newFilteredMetrics)
+  },[metric, metricList])
   
 	return (
 		<>
 			<div className='flex h-screen w-auto'>
-				<Sidebar updateServer={updateServer}/>
-				<div className='w-screen flex flex-col items-center content-center'>
-					<Tabs changeTab={changeTab} tab={tab} />
-					{tab === 'overview' && <Overview server={server}/>}
-          {tab === 'topics' && <Topics server={server} />}
-					{tab === 'brokers' && <Brokers server={server} />}
-					{tab === '' && <Landing />}
+				<div className='w-screen flex flex-col'>
+					<div className='flex items-center justify-center content-center px-4 bg-slate-900'>
+						<AddServerModal updateServer={updateServer}/>
+						<CreateChartForm metric={metric} setMetric={setMetric} filteredMetrics={filteredMetrics} addChart={addChart} />
+						<span className='ml-auto text-white w-72 text-2xl font-black'>KAFKA NIGHTOWL</span>
+					</div>
+					<GridLayout items={layout} onLayoutChange={onLayoutChange} />
 				</div>
 			</div>
 		</>
