@@ -17,9 +17,10 @@ type GridLayoutProps = {
   onLayoutChange: (newLayout: Layout[]) => void
   server: string
   chartData: ChartDataType[]
+  topic?: string
 };
 
-const GridLayout: React.FC<GridLayoutProps> = ({items, onLayoutChange, server, chartData}): ReactElement => {
+const GridLayout: React.FC<GridLayoutProps> = ({items, onLayoutChange, server, chartData, topic}): ReactElement => {
   const ResponsiveGridLayout = WidthProvider(Responsive);
   return (
     <div className="w-full h-full overflow-scroll bg-slate-800">
@@ -36,7 +37,7 @@ const GridLayout: React.FC<GridLayoutProps> = ({items, onLayoutChange, server, c
       >
         {chartData.map((item) => (
           <div key={item.layout.i} className="bg-gray-700 p-2" data-grid={item.layout}>
-            <Chart server={server} query={item.url.query} name={item.url.name} />
+            <Chart server={server} query={item.url.query} name={item.url.name} topic={topic} />
           </div>
         ))}
       </ResponsiveGridLayout>

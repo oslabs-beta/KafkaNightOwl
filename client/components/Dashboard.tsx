@@ -5,7 +5,7 @@ import CreateChartForm from './CreateChartForm';
 import AddServerModal from './AddServerModal';
 import GridLayout from './GridLayout';
 import axios from "axios";
-import defaultCoreMetricData from './DefaultData'
+import { defaultCoreMetricData, defaultTopicData } from './DefaultData'
 
 type DashboardProps = {};
 type ChartDataType = {
@@ -23,13 +23,15 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 	const [metricList, setMetricList] = useState<string[]>(data.data);
 	const [filteredMetrics, setFilteredMetrics] = useState<string[]>(data.data)
 	const [topicList, setTopicList] = useState<string[]>([])
-	const [topic, setCurrentTopic] = useState<string>('')
+	const [topic, setTopic] = useState<string>('')
 	const [layout, setLayout] = useState<Layout[]>([
     {i: 'item 1', x: 0, y:0, w:2, h:1, static: false},
     {i: 'item 2', x: 2, y:2, w:2, h:1, static: false},
     {i: 'item 3', x: 4, y:4, w:2, h:1, static: false}
 	]);
-	const [chartData, setChartData] = useState<ChartDataType[] | null>(defaultCoreMetricData)
+	const [coreData, setCoreData] = useState<ChartDataType[]>(defaultCoreMetricData)
+	const [topicData, setTopicData] = useState<ChartDataType[]>(defaultTopicData)
+	const [tab, setTab] = useState<number>(0)
 
 	const onLayoutChange = (newLayout) => {
 		setLayout(newLayout)
@@ -78,6 +80,17 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 			.sort()
     setFilteredMetrics(newFilteredMetrics)
   },[metric, metricList])
+
+	const topicTabs = [<button onClick={() => changeTab(0)} className='btn btn-xs join-item'>Core</button>];
+	const topicGrids = [<GridLayout server={server} items={layout} onLayoutChange={onLayoutChange} chartData={coreData} />];
+	topicList.map((topic, index) => {
+		topicTabs.push(<button onClick={() => changeTab(index + 1)} className='btn btn-xs join-item'>{topic}</button>);
+		topicGrids.push(<GridLayout server={server} items={layout} onLayoutChange={onLayoutChange} chartData={topicData} topic={topic} />);
+	})
+
+	const changeTab = (num) => {
+		setTab(num)
+	}
   
 	return (
 		<>
@@ -88,7 +101,10 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
 						<CreateChartForm server={server} metric={metric} setMetric={setMetric} filteredMetrics={filteredMetrics} addChart={addChart} />
 						<span className='ml-auto text-white w-72 text-2xl font-black'>KAFKA NIGHTOWL</span>
 					</div>
-					<GridLayout server={server} items={layout} onLayoutChange={onLayoutChange} chartData={chartData} />
+					<div className="join">
+						{topicTabs}
+					</div>
+					{topicGrids[tab]}
 				</div>
 			</div>
 		</>

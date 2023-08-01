@@ -35,9 +35,6 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
   const url = topic
     ? `http://${server}/api/v1/query?query=${query}{name="${name}",topic="${topic}",}[1m]`
     : `http://${server}/api/v1/query?query=${query}{name="${name}",}[1m]`
-      // : `http://${server}/api/v1/query?query=${query}[1m]`
-
-  // console.log(url)
 
   useEffect(() => {
     if (!server) return undefined;
@@ -47,7 +44,6 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
         const array = response.data.data.result[0].values
         organizeData(array);
       }
-      console.log('test')
     }
     fetchData();
     const interval = setInterval(fetchData, 5000);
