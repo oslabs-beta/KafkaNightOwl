@@ -10,10 +10,11 @@ import axios from "axios";
 Chartjs.register(CategoryScale);
 
 type OverviewProps = {
-  server: string;
+  server: string
 };
 
 const Overview: React.FC<OverviewProps> = ({ server }): ReactElement => {
+  
   const [overviewData, setOverviewData] = useState({
     activeControllers: [[null, null]],
     underRepPartitions: [[null, null]],
