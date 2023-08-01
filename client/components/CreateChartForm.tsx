@@ -29,7 +29,7 @@ const CreateChartForm: React.FC<CreateChartFormProps> = ({metric, setMetric, fil
             <SearchBar metric={metric} setMetric={setMetric} filteredMetrics={filteredMetrics} />
             <button className="btn btn-primary text-4xl h-12 w-12"><i className="fa-solid fa-plus fa-2xs" onClick={() => addChart(makeFakeChart())}></i></button>
           </div>
-          <div className='bg-gray-700 rounded-lg overflow-hidden p-4 w-auto h-96 my-2'><Chart server={server}/></div>
+          <div className='bg-gray-700 rounded-lg overflow-hidden p-4 w-auto h-96 my-2'></div>
           <div className='bg-slate-600 rounded-lg overflow-hidden w-auto h-96'></div>
         </div>
       </div>
