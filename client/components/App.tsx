@@ -6,14 +6,14 @@ import Homepage from './Homepage';
 type AppProps = {};
 
 const App: React.FC<AppProps> = (): ReactElement => {
-	const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(true);
 
-	return (
+  return (
     <>
       {/* <Dashboard /> */}
-			{isLoggedIn ? <Dashboard /> : <Homepage setLoggedIn={setLoggedIn} />}
+      {isLoggedIn ? <Dashboard /> : <Homepage setLoggedIn={setLoggedIn} />}
     </>
   );
-}
+};
 
 export default App;
