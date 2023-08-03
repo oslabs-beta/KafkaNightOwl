@@ -1,6 +1,10 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import Dashboard from '../client/components/Dashboard';
 import React from 'react';
+
+afterEach(() => {
+  cleanup();
+});
 
 describe('Dashboard Component', () => {
   test('renders application name', () => {

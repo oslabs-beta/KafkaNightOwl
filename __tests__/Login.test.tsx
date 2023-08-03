@@ -1,7 +1,11 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import Login from '../client/components/Login';
 import React from 'react';
 
+afterEach(() => {
+  cleanup();
+})
+ 
 describe('Login Component', () => {
   test('renders login form with email and password inputs', () => {
     render(<Login setLoggedIn={() => {}} openSignUp={() => {}} />);
