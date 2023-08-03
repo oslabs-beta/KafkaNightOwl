@@ -5,6 +5,7 @@ const cors = require('cors')
 const path = require("path");
 const metricsRouter = require("./routers/metricsRouter.js");
 const userRouter = require('./routers/userRoutes.js');
+const alertsRouter = require('./routers/alertsRouter.js');
 const connectDb = require('./config/dbConnection');
 
 app.use(cors())
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 console.log("in the server!");
 app.use('/user', userRouter);
 app.use("/jmx", metricsRouter);
+app.use('/alerts', alertsRouter);
 
 app.get("/", (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, "../index.html"));
