@@ -9,4 +9,16 @@ describe('Dashboard Component', () => {
     const appName = screen.getByText(/kafka nightowl/i);
     expect(appName).toBeInTheDocument();
   });
+  test('renders "add server" button', () => {
+    render(<Dashboard />);
+
+    const addServerButton = screen.getByText(/add server/i);
+    expect(addServerButton).toBeInTheDocument();
+  });
+  test('renders "add chart" button', () => {
+    render(<Dashboard />);
+
+    const addChartButton = screen.getByText(/add chart/i);
+    expect(addChartButton).toBeInTheDocument();
+  });
 });
