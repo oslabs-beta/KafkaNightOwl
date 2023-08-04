@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from "react";
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
@@ -13,21 +13,25 @@ type ChartDataType = {
   };
 };
 type GridLayoutProps = {
-  items: Layout[];
-  onLayoutChange: (newLayout: Layout[]) => void;
-  server: string;
-  chartData: ChartDataType[];
-  topic?: string;
+  layout: Layout[]
+  onLayoutChange: (newLayout: Layout[]) => void
+  server: string
+  chartData: ChartDataType[]
+  topic?: string
 };
 
-const GridLayout: React.FC<GridLayoutProps> = ({
-  items,
-  onLayoutChange,
-  server,
-  chartData,
-  topic,
-}): ReactElement => {
+const GridLayout: React.FC<GridLayoutProps> = ({ layout, onLayoutChange, server, chartData, topic }): ReactElement => {
+  const [charts, setCharts] = useState([])
   const ResponsiveGridLayout = WidthProvider(Responsive);
+  
+  useEffect(() => {
+    setCharts(chartData.map((item) => (
+      <div key={item.layout.i} className="bg-gray-700 p-2" data-grid={item.layout}>
+        <Chart server={server} query={item.url.query} name={item.url.name} topic={topic} />
+      </div>
+    )))
+  }, [chartData])
+
   return (
     <div className='w-full h-full overflow-scroll bg-slate-800'>
       <ResponsiveGridLayout
@@ -37,24 +41,11 @@ const GridLayout: React.FC<GridLayoutProps> = ({
         rowHeight={100}
         measureBeforeMount={true}
         useCSSTransforms={false}
-        layouts={{ lg: items }}
-        margin={[5, 5]}
+        layouts={{ lg: layout }}
+        margin={[5,5]}
         onLayoutChange={onLayoutChange}
       >
-        {chartData.map((item) => (
-          <div
-            key={item.layout.i}
-            className='bg-gray-700 p-2'
-            data-grid={item.layout}
-          >
-            <Chart
-              server={server}
-              query={item.url.query}
-              name={item.url.name}
-              topic={topic}
-            />
-          </div>
-        ))}
+        {charts}
       </ResponsiveGridLayout>
     </div>
   );
