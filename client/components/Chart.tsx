@@ -8,15 +8,15 @@ type ChartProps = {
   server: string,
   query: string,
   name: string,
-  topic?: string
+  topic: string | undefined
 };
 
-const dummyData = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+const loading = {
+  labels: [],
   datasets: [
     {
-      label: 'Sample Line Chart',
-      data: [10, 20, 30, 25, 15, 40],
+      label: 'Loading',
+      data: [],
       backgroundColor: 'rgba(255,255,255,0.2)',
       borderColor: 'rgba(255,255,255,0.2)',
       borderWidth: 2,
@@ -28,16 +28,14 @@ const dummyData = {
 
 const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactElement => {
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement)
-  const [data, setData] = useState(dummyData)
-
-
+  const [data, setData] = useState(loading)
 
   const url = topic
     ? `http://${server}/api/v1/query?query=${query}{name="${name}",topic="${topic}",}[1m]`
     : `http://${server}/api/v1/query?query=${query}{name="${name}",}[1m]`
 
   useEffect(() => {
-    if (!server) return undefined;
+    if (!server || !data) return undefined;
     const fetchData = async () => {
       const response = await axios.get(url)
       if (response.data.data.result[0].values) {
@@ -48,24 +46,27 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
     fetchData();
     const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
-  },[])
+  },[data])
 
   const organizeData = (array) => {
-    const blah = {
-      time: [],
-      value: [],
-    }
+    
+    const time = [];
+    const value = [];
+    
     array.forEach(el => {
-      blah.time.push(new Date(el[0] * 1000).toLocaleTimeString());
-      blah.value.push(el[1]);
+      if (el[1].length > 5 && el[1].includes('.')) {
+        el[1] = el[1].slice(0, 5)
+      }
+      time.push(new Date(el[0] * 1000).toLocaleTimeString());
+      value.push(el[1]);
     })
     
-    const newblah = {
-      labels: blah.time,
+    const newChartData = {
+      labels: time,
       datasets: [
         {
           label: 'Sample Line Chart',
-          data: blah.value,
+          data: value,
           backgroundColor: 'rgba(255,255,255,0.2)',
           borderColor: 'rgba(255,255,255,0.2)',
           borderWidth: 2,
@@ -74,7 +75,7 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
         },
       ],
     }
-    setData(newblah);
+    setData(newChartData);
   }
 
 
@@ -84,7 +85,11 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
     animation: {
       duration: 0,
     },
-    scales: { x: { display: false } },
+    scales: {
+      x: {
+        display: false
+      },
+    },
   }
 
   return (
