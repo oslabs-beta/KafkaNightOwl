@@ -2,16 +2,16 @@ import React, { ReactElement, useState, useEffect } from "react";
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import Chart from "./Chart";
+import Chart from './Chart';
 
 type ChartDataType = {
-  layout: Layout,
+  layout: Layout;
   url: {
-    query: string,
-    name: string,
-    topic?: string
-  }
-}
+    query: string;
+    name: string;
+    topic?: string;
+  };
+};
 type GridLayoutProps = {
   layout: Layout[]
   onLayoutChange: (newLayout: Layout[]) => void
@@ -33,7 +33,7 @@ const GridLayout: React.FC<GridLayoutProps> = ({ layout, onLayoutChange, server,
   }, [chartData])
 
   return (
-    <div className="w-full h-full overflow-scroll bg-slate-800">
+    <div className='w-full h-full overflow-scroll bg-slate-800'>
       <ResponsiveGridLayout
         className='layout'
         breakpoints={{ lg: 1200 }}
@@ -48,7 +48,7 @@ const GridLayout: React.FC<GridLayoutProps> = ({ layout, onLayoutChange, server,
         {charts}
       </ResponsiveGridLayout>
     </div>
-  )
-}
+  );
+};
 
 export default GridLayout;
