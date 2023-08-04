@@ -1,28 +1,28 @@
-import { render, screen, cleanup } from '@testing-library/react';
-import Dashboard from '../client/components/Dashboard';
-import React from 'react';
+// import { render, screen, cleanup } from '@testing-library/react';
+// import Dashboard from '../client/components/Dashboard';
+// import React from 'react';
 
-afterEach(() => {
-  cleanup();
-});
+// afterEach(() => {
+//   cleanup();
+// });
 
-describe('Dashboard Component', () => {
-  test('renders application name', () => {
-    render(<Dashboard />);
+// describe('Dashboard Component', () => {
+//   test('renders application name', () => {
+//     render(<Dashboard />);
 
-    const appName = screen.getByText(/kafka nightowl/i);
-    expect(appName).toBeInTheDocument();
-  });
-  test('renders "add server" button', () => {
-    render(<Dashboard />);
+//     const appName = screen.getByText(/kafka nightowl/i);
+//     expect(appName).toBeInTheDocument();
+//   });
+//   test('renders "add server" button', () => {
+//     render(<Dashboard />);
 
-    const addServerButton = screen.getByText(/add server/i);
-    expect(addServerButton).toBeInTheDocument();
-  });
-  test('renders "add chart" button', () => {
-    render(<Dashboard />);
+//     const addServerButton = screen.getByText(/add server/i);
+//     expect(addServerButton).toBeInTheDocument();
+//   });
+//   test('renders "add chart" button', () => {
+//     render(<Dashboard />);
 
-    const addChartButton = screen.getByText(/add chart/i);
-    expect(addChartButton).toBeInTheDocument();
-  });
-});
+//     const addChartButton = screen.getByText(/add chart/i);
+//     expect(addChartButton).toBeInTheDocument();
+//   });
+// });

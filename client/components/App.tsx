@@ -6,10 +6,12 @@ type AppProps = {};
 
 const App: React.FC<AppProps> = (): ReactElement => {
   const [isLoggedIn, setLoggedIn] = useState(false);
-
+  const handleLogout = () =>{
+    setLoggedIn(false);
+  }
   return (
     <>
-      {isLoggedIn ? <Dashboard /> : <Homepage setLoggedIn={setLoggedIn} />}
+      {isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Homepage setLoggedIn={setLoggedIn} />}
     </>
   );
 };

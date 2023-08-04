@@ -7,7 +7,10 @@ import axios from 'axios';
 import { defaultCoreMetricData, defaultTopicData } from './DefaultData';
 import React from 'react';
 
-type DashboardProps = {};
+type DashboardProps = {
+  handleLogout: (e: any) => void;
+};
+
 type ChartDataType = {
   layout: Layout;
   url: {
@@ -17,7 +20,7 @@ type ChartDataType = {
   };
 };
 
-const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
+const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
   const [server, setServer] = useState<string | null>('localhost:9090');
   const [metric, setMetric] = useState<string>('');
   const [metricList, setMetricList] = useState<string[]>([]);
@@ -164,6 +167,7 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
             <span className='ml-auto text-white w-72 text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
+            <button className = 'btn' onClick={(e) => handleLogout(e)}>LogOut</button>
           </div>
           <div className='join'>{topicTabs}</div>
           {topicGrids[tab]}
