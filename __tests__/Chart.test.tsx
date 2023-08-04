@@ -7,7 +7,7 @@
 // });
 
 import { render, screen, cleanup } from '@testing-library/react';
-import Chart, {organizeData } from '../client/components/Chart';
+import Chart, { organizeData } from '../client/components/Chart';
 import React, { useState } from 'react';
 
 afterEach(() => {
@@ -16,11 +16,11 @@ afterEach(() => {
 
 //Edit this test when charts have titles
 describe('Chart Component', () => {
-    test('A chart is rendered', () => {
-      render(<Chart server='localhost:9090' query='' name='' topic='' />);
-      // expect(getBy('Line')).toBeInTheDocument()
-      expect(screen.getByText('chart')).toBeInTheDocument();
-    });
+  test('A chart is rendered', () => {
+    render(<Chart server='localhost:9090' query='' name='' topic='' />);
+    // expect(getBy('Line')).toBeInTheDocument()
+    expect(screen.getByText('chart')).toBeInTheDocument();
+  });
 
   test('Data is organized ', () => {
     const dummyData = {
