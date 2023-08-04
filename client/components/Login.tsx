@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { ReactElement, useState } from "react";
 import axios from "axios";
@@ -12,6 +13,9 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const [showErrorPopup, setErrorPopup] = useState<Boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
@@ -21,7 +25,12 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
         console.log(res)
       console.log('success!')
       setLoggedIn(true);
-    });
+    })
+    .catch((error)=>{
+      console.error(error);
+      setErrorPopup(true);
+      setErrorMessage('Invalid email or password');
+    })
   };
 
   return (
@@ -42,6 +51,21 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
                 <input type="password" placeholder="Enter Password" onChange={e=>setPassword(e.target.value)} value={password}
                     className="w-full input input-bordered" />
             </div>
+            {showErrorPopup && (
+        <div className="relative flex flex-col items-center justify-center bg-zinc-400 p-4 rounded-md">
+          <p className="text-white py-2">{errorMessage}</p>
+          <button
+              className="  bg-red-600 border-1 text-white rounded-full px-2 "
+              onClick={() => setErrorPopup(false)}>
+                <p className="text-center text-white">
+                  Close
+                </p>
+                
+          </button>
+        </div>
+    
+    )}
+
             <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forgot Password?</a>
             <div>
                 <button className="btn btn-block" onClick={(e) => handleSubmit(e)}>Login</button>
