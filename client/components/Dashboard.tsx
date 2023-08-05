@@ -21,7 +21,8 @@ type ChartDataType = {
 };
 
 const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
-  const [server, setServer] = useState<string | null>('localhost:9090');
+  // const [server, setServer] = useState<string | null>('localhost:9090');
+  const [server, setServer] = useState<string | null>();
   const [metric, setMetric] = useState<string>('');
   const [metricList, setMetricList] = useState<string[]>([]);
   const [filteredMetrics, setFilteredMetrics] = useState<string[]>([]);
@@ -32,7 +33,8 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
     defaultCoreMetricData
   );
   const [topicData, setTopicData] = useState<ChartDataType[]>(defaultTopicData);
-  const [tab, setTab] = useState<number>(0);
+  const [tab, setTab] = useState<number | null>();
+	// const [topicTabs, setTopicTabs] = useState([]);
 
   const onLayoutChange = (newLayout) => {
     setLayout(newLayout);
@@ -68,9 +70,21 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
           topics.push(data.metric.topic);
       });
       setTopicList(topics);
+			setCoreData(defaultCoreMetricData);
+			// topicTabs.push(
+			// 	<button key={'default'} onClick={() => changeTab(0)} className='btn btn-xs join-item'>
+      // 		Core
+    	//   </button>,
+			// );
+
+      
     } catch (err) {
       console.log(err);
+			setTopicList([]);
+			setCoreData([]);
+			alert('Please provide an active port')
     }
+		
   };
 
   // fetches metric list from client
@@ -108,11 +122,14 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
     setFilteredMetrics(newFilteredMetrics);
   }, [metric, metricList]);
 
-  const topicTabs = [
-    <button key={'default'} onClick={() => changeTab(0)} className='btn btn-xs join-item'>
-      Core
-    </button>,
-  ];
+  const topicTabs = [];
+  if (topicList.length) {
+		topicTabs.push(
+			<button key={'default'} onClick={() => changeTab(0)} className='btn btn-xs join-item'>
+				Core
+			</button>,
+		);
+	} 
 
   const topicGrids = [
     <GridLayout
@@ -121,6 +138,7 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
       layout={layout}
       onLayoutChange={onLayoutChange}
       chartData={coreData}
+			tab={tab}
     />,
   ];
 
@@ -133,6 +151,7 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
         {topic}
       </button>
     );
+		// setTopicTabs(topicTabs);
 
     topicGrids.push(
       <GridLayout
@@ -141,6 +160,7 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
         onLayoutChange={onLayoutChange}
         chartData={topicData}
         topic={topic}
+				tab={tab}
       />
     );
   });
