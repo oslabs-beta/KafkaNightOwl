@@ -2369,10 +2369,6 @@ html {
   width: 15rem;
 }
 
-.w-72 {
-  width: 18rem;
-}
-
 .w-\[425px\] {
   width: 425px;
 }
@@ -2389,12 +2385,41 @@ html {
   width: auto;
 }
 
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .w-full {
   width: 100%;
 }
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[45rem\] {
+  width: 45rem;
+}
+
+.w-\[40rem\] {
+  width: 40rem;
+}
+
+.w-\[35rem\] {
+  width: 35rem;
+}
+
+.w-\[30rem\] {
+  width: 30rem;
+}
+
+.w-\[25rem\] {
+  width: 25rem;
+}
+
+.w-\[20rem\] {
+  width: 20rem;
 }
 
 .max-w-\[1100px\] {
