@@ -73,11 +73,17 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
   useEffect(() => {
     if (!server || !data) return undefined;
     const fetchData = async () => {
-      const response = await axios.get(url);
-      if (response.data.data.result[0].values) {
-        const array = response.data.data.result[0].values;
-        setData(organizeData(array));
+      try {
+        const response = await axios.get(url);
+        if (response.data.data.result[0].values) {
+          const array = response.data.data.result[0].values;
+          setData(organizeData(array));
+        }
+      } catch (err) {
+        console.log(err);
+        return;
       }
+ 
     };
     fetchData();
     const interval = setInterval(fetchData, 5000);
@@ -89,6 +95,18 @@ const options = {
   responsive: true,
   animation: {
     duration: 0,
+  },
+  scales: {
+    y: {
+      ticks: {
+        color: '#bbb'
+      }
+    },
+    x: {
+      ticks: {
+        color: '#bbb'
+      }
+    }
   },
   plugins: {
     title: {
