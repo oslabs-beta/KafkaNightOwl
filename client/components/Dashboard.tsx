@@ -1,5 +1,4 @@
 import { useState, useEffect, ReactElement } from 'react';
-import data from '../../data.json';
 import { Layout } from 'react-grid-layout';
 import CreateChartForm from './CreateChartForm';
 import AddServerModal from './AddServerModal';
@@ -8,7 +7,10 @@ import axios from 'axios';
 import { defaultCoreMetricData, defaultTopicData } from './DefaultData';
 import React from 'react';
 
-type DashboardProps = {};
+type DashboardProps = {
+  handleLogout: (e: any) => void;
+};
+
 type ChartDataType = {
   layout: Layout;
   url: {
@@ -18,18 +20,14 @@ type ChartDataType = {
   };
 };
 
-const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
+const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
   const [server, setServer] = useState<string | null>('localhost:9090');
   const [metric, setMetric] = useState<string>('');
-  const [metricList, setMetricList] = useState<string[]>(data.data);
-  const [filteredMetrics, setFilteredMetrics] = useState<string[]>(data.data);
+  const [metricList, setMetricList] = useState<string[]>([]);
+  const [filteredMetrics, setFilteredMetrics] = useState<string[]>([]);
+  const [metricData, setMetricData] = useState([]);
   const [topicList, setTopicList] = useState<string[]>([]);
-  const [topic, setTopic] = useState<string>('');
-  const [layout, setLayout] = useState<Layout[]>([
-    { i: 'item 1', x: 0, y: 0, w: 2, h: 1, static: false },
-    { i: 'item 2', x: 2, y: 2, w: 2, h: 1, static: false },
-    { i: 'item 3', x: 4, y: 4, w: 2, h: 1, static: false },
-  ]);
+  const [layout, setLayout] = useState<Layout[]>([]);
   const [coreData, setCoreData] = useState<ChartDataType[]>(
     defaultCoreMetricData
   );
@@ -40,14 +38,21 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
     setLayout(newLayout);
   };
 
-  const addChart = (chart: Layout) => {
-    setLayout((prevLayout: Layout[]): Layout[] => [...prevLayout, chart]);
+  const addChart = (query: string, name: string, topic: string | undefined) => {
+    const newChart = {
+      layout: {i: `${query}${name}${topic}`, x: 0, y:Infinity, w:2, h:2, static: false},
+      url: {
+        query,
+        name,
+        topic
+      }
+    }
+    setCoreData((prev: ChartDataType[]): ChartDataType[] => [...prev, newChart]);
   };
 
   const updateServer = async (serverString: string) => {
     if (!serverString) return console.error('Please input Port num');
     setServer(serverString);
-    console.log(server);
     try {
       const brokerTopicMetrics = await axios.get(
         `http://${serverString}/api/v1/query?query=kafka_server_BrokerTopicMetrics_Count{name="MessagesInPerSec"}`
@@ -63,20 +68,34 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
           topics.push(data.metric.topic);
       });
       setTopicList(topics);
-      console.log(topicList);
     } catch (err) {
       console.log(err);
     }
   };
-  // const updateServer = (serverString: string): void => {
-  // 	if(!serverString) return console.error('Please input Port num');
-  // 	setServer(serverString);
-  // }
 
-  // TODO: fetch metric list from client
+  // fetches metric list from client
   useEffect(() => {
     if (!server) return undefined;
+    const getMetrics = async () => {
+      try {
+        const response = await axios.get(`http://${server}/api/v1/label/__name__/values`)
+        setMetricList(response.data.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getMetrics()
   }, [server]);
+
+  const getMetricData = async (metric: string) => {
+    if (!metricList.includes(metric)) return setMetricData([]);
+    try {
+      const response = await axios.get(`http://${server}/api/v1/query?query=${metric}`)
+      setMetricData(response.data.data.result)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   // TODO: add debouncer/limiter to limit rerenders when typing
   useEffect((): void => {
@@ -90,18 +109,21 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
   }, [metric, metricList]);
 
   const topicTabs = [
-    <button onClick={() => changeTab(0)} className='btn btn-xs join-item'>
+    <button key={'default'} onClick={() => changeTab(0)} className='btn btn-xs join-item'>
       Core
     </button>,
   ];
+
   const topicGrids = [
     <GridLayout
+      key={'default'}
       server={server}
-      items={layout}
+      layout={layout}
       onLayoutChange={onLayoutChange}
       chartData={coreData}
     />,
   ];
+
   topicList.map((topic, index) => {
     topicTabs.push(
       <button
@@ -111,10 +133,11 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
         {topic}
       </button>
     );
+
     topicGrids.push(
       <GridLayout
         server={server}
-        items={layout}
+        layout={layout}
         onLayoutChange={onLayoutChange}
         chartData={topicData}
         topic={topic}
@@ -137,11 +160,14 @@ const Dashboard: React.FC<DashboardProps> = (): ReactElement => {
               metric={metric}
               setMetric={setMetric}
               filteredMetrics={filteredMetrics}
+              getMetricData={getMetricData}
               addChart={addChart}
+              metricData={metricData}
             />
             <span className='ml-auto text-white w-72 text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
+            <button className = 'btn' onClick={(e) => handleLogout(e)}>LogOut</button>
           </div>
           <div className='join'>{topicTabs}</div>
           {topicGrids[tab]}
