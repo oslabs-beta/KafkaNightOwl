@@ -21,7 +21,6 @@ type ChartDataType = {
 };
 
 const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
-  // const [server, setServer] = useState<string | null>('localhost:9090');
   const [server, setServer] = useState<string | null>();
   const [metric, setMetric] = useState<string>('');
   const [metricList, setMetricList] = useState<string[]>([]);
@@ -34,7 +33,6 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
   );
   const [topicData, setTopicData] = useState<ChartDataType[]>(defaultTopicData);
   const [tab, setTab] = useState<number | null>();
-	// const [topicTabs, setTopicTabs] = useState([]);
 
   const onLayoutChange = (newLayout) => {
     setLayout(newLayout);
@@ -71,13 +69,6 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
       });
       setTopicList(topics);
 			setCoreData(defaultCoreMetricData);
-			// topicTabs.push(
-			// 	<button key={'default'} onClick={() => changeTab(0)} className='btn btn-xs join-item'>
-      // 		Core
-    	//   </button>,
-			// );
-
-      
     } catch (err) {
       console.log(err);
 			setTopicList([]);
@@ -151,7 +142,6 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
         {topic}
       </button>
     );
-		// setTopicTabs(topicTabs);
 
     topicGrids.push(
       <GridLayout
