@@ -164,7 +164,7 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
               addChart={addChart}
               metricData={metricData}
             />
-            <span className='ml-auto text-white w-72 text-2xl font-black'>
+            <span className='ml-auto text-white w-[25rem] text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
             <button className = 'btn' onClick={(e) => handleLogout(e)}>LogOut</button>

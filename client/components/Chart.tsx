@@ -5,6 +5,7 @@ import {
   LinearScale,
   CategoryScale,
   PointElement,
+  Title
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import React from 'react';
@@ -45,7 +46,7 @@ const organizeData = (array) => {
   });
 
   const newChartData = {
-    labels: time,
+    labels: ['T-2:00', '', '', 'T-1:00', '', '', 'T-0:00'],
     datasets: [
       {
         label: 'Sample Line Chart',
@@ -59,16 +60,10 @@ const organizeData = (array) => {
     ],
   };
   return newChartData;
-  // setData(newChartData);
 };
 
-const Chart: React.FC<ChartProps> = ({
-  server,
-  query,
-  name,
-  topic,
-}): ReactElement => {
-  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
+const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactElement => {
+  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title);
   const [data, setData] = useState(loading);
 
   const url = topic
@@ -89,39 +84,29 @@ const Chart: React.FC<ChartProps> = ({
     return () => clearInterval(interval);
   }, [data]);
 
-  //   const newblah = {
-  //     labels: blah.time,
-  //     datasets: [
-  //       {
-  //         label: 'Sample Line Chart',
-  //         data: blah.value,
-  //         backgroundColor: 'rgba(255,255,255,0.2)',
-  //         borderColor: 'rgba(255,255,255,0.2)',
-  //         borderWidth: 2,
-  //         pointRadius: 4,
-  //         pointBackgroundColor: 'rgba(255,255,255,0.2)',
-  //       },
-  //     ],
-  //   };
-  //   setData(newblah);
-  // };
-
-  const options = {
-    maintainAspectRatio: false,
-    responsive: true,
-    animation: {
-      duration: 0,
-    },
-    scales: {
-      x: {
-        display: false,
+const options = {
+  maintainAspectRatio: false,
+  responsive: true,
+  animation: {
+    duration: 0,
+  },
+  plugins: {
+    title: {
+      display: true,
+      position: 'bottom' as const,
+      text: topic ? `${query} | ${name} | ${topic}` : `${query} | ${name}`,
+      color: '#ddd',
+      align: 'start' as const,
+      padding: {
+        top: 0,
+        bottom: 0
       },
     },
-  };
+  }
+};
 
   return (
     <>
-      <span>chart</span>
       <Line data={data} options={options} />
     </>
   );
