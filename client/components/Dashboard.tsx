@@ -181,6 +181,10 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
           </div>
           <div className='join'>{topicTabs}</div>
           {topicGrids[tab]}
+          <div className='absolute -z-50 flex h-full w-full justify-center items-center bg-slate-800 text-9xl text-black font-black'>
+            <img className='opacity-20' src="../assets/image/logo.png" alt="hoot hoot" />
+            <h1 className='opacity-20 select-none'>KAFKA NIGHTOWL</h1>
+          </div>
         </div>
       </div>
     </>
