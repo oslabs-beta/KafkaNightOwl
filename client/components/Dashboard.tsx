@@ -5,6 +5,7 @@ import AddServerModal from './AddServerModal';
 import GridLayout from './GridLayout';
 import axios from 'axios';
 import { defaultCoreMetricData, defaultTopicData } from './DefaultData';
+import NotificationsContainer from './NotificationContainer';
 import React from 'react';
 
 type DashboardProps = {
@@ -174,6 +175,7 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
               addChart={addChart}
               metricData={metricData}
             />
+            <NotificationsContainer/>
             <span className='ml-auto text-white w-[25rem] text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
