@@ -4,6 +4,8 @@ module.exports = {
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
   },
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  collectCoverageFrom: ['__mocks__/*.{js,jsx,ts,tsx}'],
+  resetMocks: false,
 };

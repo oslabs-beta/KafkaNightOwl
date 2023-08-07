@@ -83,7 +83,7 @@ const Chart: React.FC<ChartProps> = ({ server, query, name, topic }): ReactEleme
         console.log(err);
         return;
       }
- 
+
     };
     fetchData();
     const interval = setInterval(fetchData, 5000);
