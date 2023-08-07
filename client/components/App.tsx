@@ -1,6 +1,7 @@
 import { ReactElement, useState } from 'react';
 import Dashboard from './Dashboard';
 import Homepage from './Homepage';
+import NotificationsContainer from './NotificationContainer';
 
 type AppProps = {};
 
@@ -10,9 +11,10 @@ const App: React.FC<AppProps> = (): ReactElement => {
     setLoggedIn(false);
   }
   return (
-    <>
-      {isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Homepage setLoggedIn={setLoggedIn} />}
-    </>
+    // <>
+    //   {isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Homepage setLoggedIn={setLoggedIn} />}
+    // </>
+    <NotificationsContainer/>
   );
 };
 
