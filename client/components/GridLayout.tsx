@@ -34,7 +34,7 @@ const GridLayout: React.FC<GridLayoutProps> = ({ layout, onLayoutChange, server,
   }, [chartData, tab])
 
   return (
-    <div className='w-full h-full overflow-scroll bg-slate-800'>
+    <div className='w-full h-full overflow-scroll'>
       <ResponsiveGridLayout
         className='layout'
         breakpoints={{ lg: 1200 }}
