@@ -6,7 +6,7 @@ import axios from "axios";
 
 type LoginTypes = {
   setLoggedIn: (newState: boolean) => void
-  openSignUp: (e: any) => void
+  openSignUp: () => void
 };
 
 const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement => {
@@ -21,10 +21,10 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
     const userData = { email, password };
     console.log('user', userData)
     axios.post('http://localhost:5050/user/login', userData)
-      .then((res) => {
-        console.log(res)
-      console.log('success!')
-      setLoggedIn(true);
+    .then((res) => {
+      console.log(res)
+    console.log('success!')
+    setLoggedIn(true);
     })
     .catch((error)=>{
       console.error(error);
@@ -34,48 +34,48 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
-    <div className="w-full p-6 bg-white border-t-4 border-gray-600 rounded-md shadow-md border-top lg:max-w-lg">
-        <h1 className="text-3xl font-semibold text-center text-gray-700">Kafka NightOwl</h1>
+    <div className="relative flex flex-col items-center justify-center w-1/2 overflow-hidden">
+      <div className="p-6 border-t-4 h-2/3 border-gray-600 bg-white rounded-md shadow-md border-top w-[32rem] lg:max-w-lg">
+        <h1 className="text-3xl font-semibold text-center text-gray-700">Already Have An Account?</h1>
+        <h1 className="text-xl font-semibold text-center text-gray-700">Sign In</h1>
         <form className="space-y-4">
-            <div>
-                <label className="label">
-                    <span className="text-base label-text">Email</span>
-                </label>
-                <input type="text" placeholder="Email Address" className="w-full input input-bordered" onChange={(e) => setEmail(e.target.value)} value={email}/>
+          <div>
+            <label className="label">
+              <span className="text-base label-text">Email</span>
+            </label>
+            <input type="text" placeholder="Email Address" className="w-full input input-bordered" onChange={(e) => setEmail(e.target.value)} value={email}/>
+          </div>
+          <div>
+            <label className="label">
+              <span className="text-base label-text">Password</span>
+            </label>
+            <input type="password" placeholder="Enter Password" onChange={e=>setPassword(e.target.value)} value={password}
+              className="w-full input input-bordered" />
+          </div>
+          {/* {showErrorPopup && (
+            <div className="relative flex flex-col items-center justify-center p-4 rounded-md">
+              <p className="text-black py-2">{errorMessage}</p>
+              <button
+                className="  bg-red-600 border-1 text-white rounded-full px-2 "
+                onClick={() => setErrorPopup(false)}>
+                <p className="text-center text-white">Close</p>
+              </button>
             </div>
-            <div>
-                <label className="label">
-                    <span className="text-base label-text">Password</span>
-                </label>
-                <input type="password" placeholder="Enter Password" onChange={e=>setPassword(e.target.value)} value={password}
-                    className="w-full input input-bordered" />
-            </div>
+          )} */}
+          <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forgot Password?</a>
+          <div>
+            <button className="btn btn-block bg-gray-200" onClick={(e) => handleSubmit(e)}>Login</button>
+            <button type="button" className="btn btn-block mt-4 bg-gray-200" onClick={() => openSignUp()}>Don't have an account? Sign up here</button>
             {showErrorPopup && (
-        <div className="relative flex flex-col items-center justify-center bg-zinc-400 p-4 rounded-md">
-          <p className="text-white py-2">{errorMessage}</p>
-          <button
-              className="  bg-red-600 border-1 text-white rounded-full px-2 "
-              onClick={() => setErrorPopup(false)}>
-                <p className="text-center text-white">
-                  Close
-                </p>
-                
-          </button>
-        </div>
-    
-    )}
-
-            <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forgot Password?</a>
-            <div>
-                <button className="btn btn-block" onClick={(e) => handleSubmit(e)}>Login</button>
+            <div className="relative flex flex-col items-center justify-center p-4 rounded-md">
+              <p className="text-red-600 py-2">{errorMessage}</p>
             </div>
-            <div>
-              <button className="btn btn-block" onClick={e => openSignUp(e)}>Don't have an account? Sign up here</button>
-            </div>
+          )}
+          </div>
         </form>
+      </div>
+      
     </div>
-</div>
   );
 };
 
