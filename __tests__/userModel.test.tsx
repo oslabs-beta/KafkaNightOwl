@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
-const { connectDB, dropDB, dropCollections } = require('../__mocks__/dbMock/setuptestdb');
-const User = require('../server/models/userModel');
-
-// import functionality from userController middleware
+/**
+ * @jest-environment node
+ */
+import mongoose from 'mongoose';
 const {
-  signupUser,
-  loginUser,
-  getUser,
-} = require('../server/controllers/userController');
+  connectDB,
+  dropDB,
+  dropCollections,
+} = require('../__mocks__/dbMock/setuptestdb');
+const User = require('../server/models/userModel');
 
 // before any tests are run, connect to mock db
 beforeAll(async () => {
