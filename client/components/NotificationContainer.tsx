@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
 import AlertCard from './AlertCard';
 
-export default function NotificationsContainer() {
+export default function NotificationsContainer( { server }) {
   const [namespace, setNamespace] = React.useState('');
 
   const handleChange = (event) => {
@@ -17,12 +17,13 @@ export default function NotificationsContainer() {
 
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
-
-    fetch('http://localhost:9090/api/v1/alerts')
+    if (!server) return;
+    fetch(`http://${server}/api/v1/alerts`)
     .then((response) => response.json())
     .then((data) => {
-        console.log(data);
-        setNotifications((prev) => ([data]));
+        if(data.data.alerts.length !== 0) {
+          setNotifications((prev) => ([data]));
+        }
       })
   },[])
 

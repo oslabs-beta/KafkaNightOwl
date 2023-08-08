@@ -19,11 +19,8 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    console.log('user', userData)
     axios.post('http://localhost:5050/user/login', userData)
     .then((res) => {
-      console.log(res)
-    console.log('success!')
     setLoggedIn(true);
     })
     .catch((error)=>{
