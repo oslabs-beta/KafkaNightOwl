@@ -53,7 +53,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const getUser = asyncHandler(async (req, res) => {
-  res.json(req.user);
+ return res.json(req.user);
 });
 
 module.exports = { signupUser, loginUser, getUser };
