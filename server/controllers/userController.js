@@ -5,27 +5,18 @@ const User = require('../models/userModel');
 require('dotenv').config();
 
 const signupUser = asyncHandler(async (req, res) => {
-  console.log('In SignupUser Middleware');
-  console.log(req.body);
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(400);
     throw new Error('Missing field');
   }
-  // const userAvaialable = await User.findOne(email);
-  // if(userAvaialable) {
-  //   res.status(400);
-  //   throw new Error("User already exists");
-  // }
-  //Hashed password
+
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log('Hashed Password: ', hashedPassword);
   const user = await User.create({
     email,
     password: hashedPassword,
   });
-
-  console.log(`User created ${user}`);
+  
   if (user) {
     res.status(201).json({ _id: user.id, email: user.email });
   } else {
@@ -35,8 +26,6 @@ const signupUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  console.log('In loginUser middleware');
-  console.log(req.body);
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(400);
@@ -64,7 +53,6 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const getUser = asyncHandler(async (req, res) => {
-  console.log('In getUser middleware');
   res.json(req.user);
 });
 
