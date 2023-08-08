@@ -11,10 +11,10 @@ const App: React.FC<AppProps> = (): ReactElement => {
     setLoggedIn(false);
   }
   return (
-    // <>
-    //   {isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Homepage setLoggedIn={setLoggedIn} />}
-    // </>
-    <NotificationsContainer/>
+    <>
+      {isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Homepage setLoggedIn={setLoggedIn} />}
+    </>
+    //  <NotificationsContainer/>
   );
 };
 
