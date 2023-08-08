@@ -18,7 +18,6 @@ const metricsController = {
       const activeControllers = await axios.get(
         `http://${port}/api/v1/query?query=kafka_controller_KafkaController_Value{name="ActiveControllerCount",}[1m]`
       );
-      console.log(activeControllers.data)
       const underRepPartitions = await axios.get(
         `http://${port}/api/v1/query?query=kafka_server_ReplicaManager_Value{name="UnderReplicatedPartitions",}[1m]`
       );

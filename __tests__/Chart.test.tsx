@@ -1,11 +1,3 @@
-// import { render, screen, cleanup } from '@testing-library/react';
-// import { organizeData, Chart, data } from '../client/components/Chart';
-// import React, { useState } from 'react';
-
-// afterEach(() => {
-//   cleanup();
-// });
-
 import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import Chart, { organizeData } from '../client/components/Chart';
 import React, { useState } from 'react';
