@@ -22,7 +22,9 @@ export default function NotificationsContainer() {
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-        setNotifications((prev) => ([data]));
+        if(data.data.alerts.length !== 0) {
+          setNotifications((prev) => ([data]));
+        }
       })
   },[])
 
