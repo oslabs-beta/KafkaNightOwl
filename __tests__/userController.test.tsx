@@ -77,3 +77,55 @@ describe('UserController.createUser', () => {
     expect(isError).toEqual(true);
   });
 });
+
+describe('UserController.loginUser', () => {
+  it('should log in a user if username/password exists in database', async () => {
+    const req = { body: { email: 'valid', password: 'password' } };
+    const res = {
+      json: function (d) {
+        console.log('\n : ' + d);
+      },
+      status: function (s) {
+        this.statusCode = s;
+        return this;
+      },
+      statusCode: 1,
+    };
+
+    // Create a mock function for res.status to track its calls and arguments
+    const statusMock = jest.fn(res.status.bind(res));
+    res.status = statusMock;
+
+    await signupUser(req, res);
+    await loginUser(req, res);
+    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(res.statusCode).toEqual(200);
+  });
+
+  it('should fail if username/password does not exist in database', async () => {
+    const req = { body: { email: 'invalid', password: 'password' } };
+    try {
+      await loginUser(req);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+    }
+  });
+
+  it('should fail if password was not in the req body', async () => {
+    const req = { body: { email: 'invalid' } };
+    try {
+      await loginUser(req);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+    }
+  });
+
+  it('should fail if username was not in the req body', async () => {
+    const req = { body: { password: 'password' } };
+    try {
+      await loginUser(req);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+    }
+  });
+});
