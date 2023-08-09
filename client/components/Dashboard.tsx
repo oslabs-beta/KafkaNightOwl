@@ -121,6 +121,9 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
 				Core
 			</button>,
 		);
+    topicTabs.push(
+      <NotificationsContainer server={server}/>
+    )
 	} 
 
   const topicGrids = [
@@ -137,7 +140,7 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
   topicList.map((topic, index) => {
     topicTabs.push(
       <button
-        onClick={() => changeTab(index + 1)}
+        onClick={() => changeTab(index + 2)}
         className='btn btn-xs join-item'
       >
         {topic}
@@ -175,7 +178,6 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
               addChart={addChart}
               metricData={metricData}
             />
-           <NotificationsContainer server={server}/> 
             <span className='ml-auto text-white w-[25rem] text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
