@@ -25,13 +25,15 @@ export default function NotificationsContainer( { server }) {
           setNotifications((prev) => ([data]));
         }
       })
-  },[])
+  },[]);
 
   return (
-  <>
-   <Grid container spacing={2}>
+  <div className='bg-slate-200'>
+    <h1 className='text-4xl text-center text-slate-200 font-serif'>Alerts Center</h1>
+  <div>
+    <Grid container spacing={2}>
       <Grid item xs={2}>
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: 120 }} >
             <FormControl fullWidth>
               <InputLabel id='demo-simple-select-label'>Sort By</InputLabel>
               <Select
@@ -51,6 +53,7 @@ export default function NotificationsContainer( { server }) {
           </Box>
       </Grid> 
    </Grid>
+   </div>
   
    <Grid container spacing={1}>
         {notifications.map((notification) => (
@@ -63,13 +66,13 @@ export default function NotificationsContainer( { server }) {
                 service={notification.data.alerts[0].labels.job}
                 severity={notification.data.alerts[0].labels.severity}
                 state={notification.data.alerts[0].state}
-                activeAt={notification.data.alerts[0].activeAt}
+                activeAt={notification.data.alerts[0].activeAt.toString()}
                 value={notification.data.alerts[0].value}
                 instance={notification.data.alerts[0].labels.instance}
               />
             </Grid>
           ))}
     </Grid>
-  </>
+    </div>
   );
 }
