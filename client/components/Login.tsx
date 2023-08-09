@@ -19,12 +19,11 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    axios.post('http://localhost:5050/user/login', userData)
+    axios.post('/user/login', userData)
     .then((res) => {
     setLoggedIn(true);
     })
     .catch((error)=>{
-      console.error(error);
       setErrorPopup(true);
       setErrorMessage('Invalid email or password');
     })
@@ -33,7 +32,7 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
   return (
     <div className="relative flex flex-col items-center justify-center w-1/2 overflow-hidden">
       <div className="p-6 border-t-4 h-2/3 border-gray-600 bg-white rounded-md shadow-md border-top w-[32rem] lg:max-w-lg">
-        <h1 className="text-3xl font-semibold text-center text-gray-700">Already Have An Account?</h1>
+        <h1 className="text-3xl font-semibold text-center text-gray-700">Hoo are you?</h1>
         <h1 className="text-xl font-semibold text-center text-gray-700">Sign In</h1>
         <form className="space-y-4">
           <div>
