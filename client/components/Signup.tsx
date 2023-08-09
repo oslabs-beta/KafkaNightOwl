@@ -15,7 +15,6 @@ const Signup: React.FC<SignupTypes> = ({setLoggedIn, openSignUp}): ReactElement 
     const userData = {password, email}
     axios.post('http://localhost:5050/user/signup', userData)
     .then((res) => {
-      console.log('Account created successfully');
       setLoggedIn(true);
     })
   };

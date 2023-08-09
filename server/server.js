@@ -3,7 +3,7 @@ const app = express();
 const port = 5050;
 const cors = require('cors')
 const path = require("path");
-const metricsRouter = require("./routers/metricsRouter.js");
+const metricsRouter = require("../archive/metricsRouter.js");
 const userRouter = require('./routers/userRoutes.js');
 const alertsRouter = require('./routers/alertsRouter.js');
 const connectDb = require('./config/dbConnection');
@@ -11,12 +11,11 @@ const connectDb = require('./config/dbConnection');
 app.use(cors())
 app.use(express.json());
 connectDb();
+
 //Serve static files
-// app.use(express.static(path.resolve(__dirname, '../client/image')));
 app.use('/assets', express.static(path.resolve(__dirname, '../client/assets')));
 app.use(express.urlencoded({ extended: true }));
 
-console.log("in the server!");
 app.use('/user', userRouter);
 app.use("/jmx", metricsRouter);
 app.use('/alerts', alertsRouter);

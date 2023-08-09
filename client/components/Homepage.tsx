@@ -17,23 +17,36 @@ const Homepage = ({setLoggedIn}) => {
     setSignupButtonClicked(prevState => !prevState)
   }
 
+
+  /*
+  
+  */
   return (
     <>
     {/* INTRO TITLE AND LOGIN/SIGNUP */}
+
       <div className="flex w-screen h-5/6 bg-slate-800">
-        <div className="w-1/2 h-full flex flex-col p-8 text-center items-center text-zinc-100">
-          <h1 className="text-6xl font-bold mt-36 ">Kafka NightOwl</h1>
-          <h2 className="text-5xl italic mt-5">Real-time insights & alerts.</h2>
+        <div className="w-1/2 h-full flex flex-col ml-24 p-8 text-center text-zinc-100">
+          <div className="flex items-end ml-24">
+            <div className="">
+              <h1 className="text-6xl font-bold mt-36 ">Kafka NightOwl</h1>
+              <h2 className="text-5xl italic mt-5">Real-time insights & alerts.</h2>
+            </div>
+            <div className="">
+              <img className="object-scale-down w-48" src="../assets/image/logo.png" />
+            </div>
+          </div>
+          
           <h4 className="text-3xl w-5/6 leading-10 text-center mt-20 ml-6">Your Gateway to Streamlined Monitoring. Harness the power of real-time metrics and actionable insights as we transform your local Kafka stream.</h4>
         </div>
         {signupButtonClicked ? <Signup setLoggedIn={setLoggedIn} openSignUp={openSignUp} /> : <Login setLoggedIn={setLoggedIn} openSignUp={openSignUp} />}
       </div>
-
+  
       {/* GITHUB */}
-      <div className="w-screen h-1/4 bg-lime-300">
+      <div className="w-screen h-1/4 bg-white">
         <div className="flex justify-center items-center h-full">
           <h1 className="text-4xl text-center mr-5">Check us out on GitHub! We're dedicated to open source. </h1>
-          <a href="https://github.com/oslabs-beta/KafkaNightOwl/" target='_blank' className="btn">CLICK HERE<i className="fa-brands fa-github fa-2xl"></i> </a>
+          <a href="https://github.com/oslabs-beta/KafkaNightOwl/" target='_blank' className="bg-slate-800 rounded-xl hover:bg-zinc-500 text-white btn p-2">CLICK HERE<i className="fa-brands fa-github fa-2xl"></i> </a>
         </div>
       </div>
 

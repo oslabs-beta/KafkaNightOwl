@@ -175,7 +175,8 @@ const Dashboard: React.FC<DashboardProps> = ({handleLogout}): ReactElement => {
               addChart={addChart}
               metricData={metricData}
             />
-            <NotificationsContainer/>
+            
+           <NotificationsContainer server={server}/> 
             <span className='ml-auto mr-5 text-white w-[25rem] text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
