@@ -24,6 +24,7 @@
 		"@emotion/react": "^11.11.1",
 		"@emotion/styled": "^11.11.0",
 		"@mui/material": "^5.14.3",
+    "@mui/system": "^5.14.4",
 		"axios": "^1.4.0",
 		"bcrypt": "^5.1.0",
 		"chart.js": "^4.3.0",
