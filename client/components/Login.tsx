@@ -19,12 +19,11 @@ const Login: React.FC<LoginTypes> = ({ setLoggedIn, openSignUp }): ReactElement 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    axios.post('http://localhost:5050/user/login', userData)
+    axios.post('/user/login', userData)
     .then((res) => {
     setLoggedIn(true);
     })
     .catch((error)=>{
-      // console.error(error);
       setErrorPopup(true);
       setErrorMessage('Invalid email or password');
     })

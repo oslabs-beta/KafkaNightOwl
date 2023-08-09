@@ -13,7 +13,7 @@ const Signup: React.FC<SignupTypes> = ({setLoggedIn, openSignUp}): ReactElement 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = {password, email}
-    axios.post('http://localhost:5050/user/signup', userData)
+    axios.post('/user/signup', userData)
     .then((res) => {
       setLoggedIn(true);
     })
