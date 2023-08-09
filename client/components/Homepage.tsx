@@ -33,7 +33,7 @@ const Homepage = ({setLoggedIn}) => {
               <h2 className="text-5xl italic mt-5">Real-time insights & alerts.</h2>
             </div>
             <div className="">
-              <img className="object-scale-down w-48" src="../assets/image/logo.png" />
+              <img className="object-scale-down w-48" src="/build/assets/image/logo.png" />
             </div>
           </div>
           
@@ -105,7 +105,7 @@ const Homepage = ({setLoggedIn}) => {
           
           <div className="flex flex-col text-center items-center text-xl font-bold tracking-wider avatar">
             <div className="w-36 bg-zinc-100 mask mask-squircle">
-              <img src="../assets/image/kelvin.png" />
+              <img src="/build/assets/image/kelvin.png" />
             </div>
             <p className='mt-4'>Kelvin Chen</p>
             <div className=""><a href="https://github.com/kc-code32" target='_blank' className=""><i className="fa-brands p-1 bg-black fa-github text-white fa-1xl rounded"></i> </a>
@@ -114,7 +114,7 @@ const Homepage = ({setLoggedIn}) => {
 
           <div className="flex flex-col text-center items-center text-xl font-bold tracking-wider avatar">
             <div className="w-36 bg-slate-100 mask mask-squircle">
-              <img src="../assets/image/jeremy.png" />
+              <img src="/build/assets/image/jeremy.png" />
             </div>
             <p className='mt-4'>Jeremy Holland</p>
             <div className=""><a href="https://github.com/PecheKeen" target='_blank' className=""><i className="fa-brands p-1 bg-black text-white fa-github fa-1xl rounded "></i> </a>
@@ -123,7 +123,7 @@ const Homepage = ({setLoggedIn}) => {
           
           <div className="flex flex-col text-center items-center text-xl font-bold tracking-wider avatar">
             <div className="w-36 bg-zinc-100 mask mask-squircle">
-              <img src="../assets/image/paul.png" />
+              <img src="/build/assets/image/paul.png" />
             </div>
             <p className='mt-4'>Paul Kim</p>
             <div className=""><a href="https://github.com/paulkimofficial" target='_blank' className=""><i className="fa-brands p-1 bg-black text-white fa-github fa-1xl rounded "></i> </a>
@@ -132,7 +132,7 @@ const Homepage = ({setLoggedIn}) => {
           
           <div className="flex flex-col text-center items-center text-xl font-bold tracking-wider avatar">
             <div className="w-36 bg-zinc-100 mask mask-squircle">
-              <img src="../assets/image/carlos.png" />
+              <img src="/build/assets/image/carlos.png" />
             </div>
             <p className='mt-4'>Carlos Revilla</p>
             <div className=""><a href="https://github.com/carlosfrev123" target='_blank' className=""><i className="fa-brands p-1 bg-black text-white fa-github fa-1xl rounded "></i> </a>
@@ -141,7 +141,7 @@ const Homepage = ({setLoggedIn}) => {
           
           <div className="flex flex-col text-center items-center text-xl font-bold tracking-wider avatar">
             <div className="w-36 bg-zinc-100 mask mask-squircle">
-              <img src="../assets/image/colin.png" />
+              <img src="/build/assets/image/colin.png" />
             </div>
             <p className='mt-4'>Colin Silvers</p>
             <div className=""><a href="https://github.com/ColinSilvers" target='_blank' className=""><i className="fa-brands p-1 bg-black text-white fa-github fa-1xl rounded "></i> </a>
