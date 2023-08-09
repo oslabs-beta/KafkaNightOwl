@@ -196,7 +196,7 @@ const Dashboard: React.FC<DashboardProps> = ({
               addChart={addChart}
               metricData={metricData}
             />
-           <NotificationsContainer server={server}/> 
+            <NotificationsContainer server={server}/> 
             <span className='ml-auto mr-5 text-white w-[25rem] text-2xl font-black'>
               KAFKA NIGHTOWL
             </span>
@@ -209,7 +209,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <div className="absolute -z-50 flex h-full w-full justify-center items-center bg-slate-800 text-9xl text-black font-black">
             <img
               className="opacity-20"
-              src="../assets/image/logo.png"
+              src="build/assets/image/black.png"
               alt="hoot hoot"
             />
             <h1 className="opacity-20 select-none">KAFKA NIGHTOWL</h1>
