@@ -26,12 +26,17 @@ const Homepage = ({ setLoggedIn }) => {
       <div className="flex w-screen h-5/6 bg-slate-800">
         <div className="w-1/2 h-full flex flex-col ml-24 p-8 text-center text-zinc-100">
           <div className="flex items-end ml-24">
-            <div className="">
-              <h1 className="text-6xl font-bold mt-36 ">Kafka NightOwl</h1>
-              <h2 className="text-5xl italic mt-5">Real-time insights & alerts.</h2>
-            </div>
-            <div className="">
-              <img className="object-scale-down w-48" src="../assets/image/logo.png" />
+            <div className="flex flex-col items-center mt-20">
+              <div className="">
+                <img
+                  className="object-scale-down w-48"
+                  src="build/assets/image/white.png"
+                />
+              </div>
+              <h1 className="text-6xl font-bold ">Kafka NightOwl</h1>
+              <h2 className="text-5xl italic mt-5">
+                Real-time insights & alerts.
+              </h2>
             </div>
           </div>
 
@@ -83,14 +88,14 @@ const Homepage = ({ setLoggedIn }) => {
             </h2>
           </div>
           <div className="bg-transparent w-[800px] h-[400px] ">
-            <img src="../assets/image/login.gif" />
+            <img src="build/assets/image/login.gif" />
           </div>
         </div>
 
         {/* ----------------- ----------------- ----------------- ----------------- DEMO2*/}
         <div className="flex py-5 px-20 mt-40">
           <div className="bg-transparent w-[800px] h-[400px] ">
-            <img src="../assets/image/default.gif" />
+            <img src="build/assets/image/default.gif" />
           </div>
           <div className="flex items-center max-w-[50%] px-5 ml-8">
             <h2 className="text-5xl font-semibold align-middle">
@@ -119,14 +124,14 @@ const Homepage = ({ setLoggedIn }) => {
             </h2>
           </div>
           <div className="bg-transparent w-[800px] h-[400px] ">
-            <img src="../assets/image/add.gif" />
+            <img src="build/assets/image/add.gif" />
           </div>
         </div>
 
         {/* ----------------- ----------------- ----------------- ----------------- DEMO4*/}
         <div className="flex py-5 px-20 mt-40">
           <div className="bg-transparent w-[800px] h-[500px] ">
-            <img src="../assets/image/alert.gif" />
+            <img src="build/assets/image/alert.gif" />
           </div>
           <div className="flex items-center max-w-[50%] px-5 ml-8">
             <h2 className="text-5xl font-semibold align-middle">
