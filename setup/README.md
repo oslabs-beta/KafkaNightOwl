@@ -1,0 +1,1 @@
+# These are sample configuration files for Kafka, Prometheus, and AlertManager. Please feel free to use your own instead of the ones provided. For more information on how to setup Prometheus and AlertManager, please visit https://prometheus.io/.

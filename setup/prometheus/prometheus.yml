@@ -1,26 +1,31 @@
+# my global config
 global:
-  # How frequently to scrape targets
-  scrape_interval:     10s
-  # How frequently to evaluate rules
-  evaluation_interval: 10s
+  scrape_interval: 5s # Set the scrape interval to every 5 seconds. Default is every 1 minute.
 
-# Rules and alerts are read from the specified file(s)
+# Load rules once and periodically evaluate them according to the global ‘evaluation_interval’.
+  # - “first_rules.yml”
+  # - “second_rules.yml”
 rule_files:
   - rules.yml
-
-# Alerting specifies settings related to the Alertmanager
+# Alertmanager configuration
 alerting:
   alertmanagers:
     - static_configs:
-      - targets:
-        # Alertmanager's default port is 9093
-        - localhost:9093
+        - targets:
+          - alertmanager:9093
 
-# A list of scrape configurations that specifies a set of
-# targets and parameters describing how to scrape them.
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it’s Prometheus itself.
 scrape_configs:
-  - job_name: 'kafka'
-    scrape_interval: 5s
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: “prometheus”
+    # metrics_path defaults to ‘/metrics’
+    # scheme defaults to ‘http’.
     static_configs:
-      - targets:
-        - localhost:9090
+      - targets: [“localhost:9090"]
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: “kafka”
+    # metrics_path defaults to ‘/metrics’
+    # scheme defaults to ‘http’.
+    static_configs:
+      - targets: [“localhost:7071"] (edited) 
