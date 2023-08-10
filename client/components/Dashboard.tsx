@@ -204,12 +204,12 @@ const Dashboard: React.FC<DashboardProps> = ({
               LogOut
             </button>
           </div>
-          <div className="join">{topicTabs}</div>
+          <div className="join ml-4">{topicTabs}</div>
           {topicGrids[tab]}
           <div className="absolute -z-50 flex h-full w-full justify-center items-center bg-slate-800 text-9xl text-black font-black">
             <img
               className="opacity-20"
-              src="build/assets/image/black.png"
+              src="/build/assets/image/black.png"
               alt="hoot hoot"
             />
             <h1 className="opacity-20 select-none">KAFKA NIGHTOWL</h1>
