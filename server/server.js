@@ -7,18 +7,30 @@ const metricsRouter = require('../archive/metricsRouter.js');
 const userRouter = require('./routers/userRoutes.js');
 const alertsRouter = require('./routers/alertsRouter.js');
 const connectDb = require('./config/dbConnection');
+const cookieParser = require('cookie-parser');
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 connectDb();
 
-//Serve static files
-app.use('/', express.static(path.resolve(__dirname, '../build')));
-app.use(express.urlencoded({ extended: true }));
 
+const corsOptions = {
+	origin: 'http://localhost:8080',  //change to KafkaNightOwl.com ?look into this? Port Forwarding in Webpack (IN MAIN)
+	credentials: true,
+};
+app.use(cors(corsOptions));
+
+//Serve static files
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
+app.use('/', express.static(path.resolve(__dirname, '../build')));
 app.use('/user', userRouter);
 app.use('/jmx', metricsRouter);
 app.use('/alerts', alertsRouter);
+
+
 
 app.get('/', (req, res) => {
 	return res.status(200).sendFile(path.join(__dirname, '../build/index.html'));

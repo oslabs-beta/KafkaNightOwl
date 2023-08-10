@@ -10,12 +10,20 @@ const Signup: React.FC<SignupTypes> = ({setLoggedIn, openSignUp}): ReactElement 
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
 
+  const [showErrorPopup, setErrorPopup] = useState<Boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = {password, email}
-    axios.post('http://localhost:5050/user/signup', userData)
+    axios.post('http://localhost:5050/user/signup', userData, {withCredentials: true})
     .then((res) => {
       setLoggedIn(true);
+    })
+    .catch((error)=>{
+      // console.error(error);
+      setErrorPopup(true);
+      setErrorMessage('email/username taken');
     })
   };
 
@@ -39,6 +47,11 @@ const Signup: React.FC<SignupTypes> = ({setLoggedIn, openSignUp}): ReactElement 
                   className="w-full input input-bordered" />
               <button className="btn btn-block mt-8 bg-gray-200" onClick={(e) => handleSubmit(e)}>Signup</button>
               <button className="btn btn-block mt-4 bg-gray-200" onClick={() => openSignUp()}>Cancel</button>
+              {showErrorPopup && (
+            <div className="relative flex flex-col items-center justify-center p-4 rounded-md">
+              <p className="text-red-600 py-2">{errorMessage}</p>
+            </div>
+          )}
           </div>
         </form>
       </div>
