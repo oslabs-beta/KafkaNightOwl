@@ -21,7 +21,9 @@ Alerts and Notifications: Kafka NightOwl leverages Prometheus AlertManager to ke
 1. Creating a User Account
    Before diving into Kafka cluster visualization, you'll need to create a user account. Simply sign up with your email and password to access the powerful features of Kafka NightOwl.
 
-   ![login](/build/assets/image/login.gif)
+  <div align='center'> 
+    <img width="500px" src="./build/assets/image/login.gif"/>
+  </div>
 
 2. Connecting to Prometheus
    To kickstart the monitoring process, connect Kafka NightOwl to your Prometheus instance running locally. Our team has provided sample configuration files for Kafka, Prometheus, and AlertManager as well as a simple guide to connect these together.
