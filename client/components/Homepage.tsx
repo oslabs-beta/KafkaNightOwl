@@ -37,14 +37,13 @@ const Homepage = ({ setLoggedIn }) => {
               <h2 className="text-5xl italic mt-5">
                 Real-time insights & alerts.
               </h2>
+              <h4 className="text-3xl w-5/6 leading-10 text-center mt-20 ml-6">
+                Your Gateway to Streamlined Monitoring. Harness the power of
+                real-time metrics and actionable insights as we transform your local
+                Kafka stream.
+              </h4>
             </div>
           </div>
-
-          <h4 className="text-3xl w-5/6 leading-10 text-center mt-20 ml-6">
-            Your Gateway to Streamlined Monitoring. Harness the power of
-            real-time metrics and actionable insights as we transform your local
-            Kafka stream.
-          </h4>
         </div>
         {signupButtonClicked ? (
           <Signup setLoggedIn={setLoggedIn} openSignUp={openSignUp} />

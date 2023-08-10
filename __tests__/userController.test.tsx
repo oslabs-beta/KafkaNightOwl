@@ -39,7 +39,6 @@ describe('UserController.createUser', () => {
     // init constants res and req as mock objects that mimic real request and response objects
     const res = {
       json: function (d) {
-        console.log('\n : ' + d);
       },
       status: function (s) {
         this.statusCode = s;
@@ -83,7 +82,6 @@ describe('UserController.loginUser', () => {
     const req = { body: { email: 'valid', password: 'password' } };
     const res = {
       json: function (d) {
-        console.log('\n : ' + d);
       },
       status: function (s) {
         this.statusCode = s;
