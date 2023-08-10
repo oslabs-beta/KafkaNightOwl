@@ -88,14 +88,14 @@ const Homepage = ({ setLoggedIn }) => {
             </h2>
           </div>
           <div className="bg-transparent w-[800px] h-[400px] ">
-            <img src="build/assets/image/login.gif" />
+            <img src="/build/assets/image/login.gif" />
           </div>
         </div>
 
         {/* ----------------- ----------------- ----------------- ----------------- DEMO2*/}
         <div className="flex py-5 px-20 mt-40">
           <div className="bg-transparent w-[800px] h-[400px] ">
-            <img src="build/assets/image/default.gif" />
+            <img src="/build/assets/image/default.gif" />
           </div>
           <div className="flex items-center max-w-[50%] px-5 ml-8">
             <h2 className="text-5xl font-semibold align-middle">
@@ -124,14 +124,14 @@ const Homepage = ({ setLoggedIn }) => {
             </h2>
           </div>
           <div className="bg-transparent w-[800px] h-[400px] ">
-            <img src="build/assets/image/add.gif" />
+            <img src="/build/assets/image/add.gif" />
           </div>
         </div>
 
         {/* ----------------- ----------------- ----------------- ----------------- DEMO4*/}
         <div className="flex py-5 px-20 mt-40">
           <div className="bg-transparent w-[800px] h-[500px] ">
-            <img src="build/assets/image/alert.gif" />
+            <img src="/build/assets/image/alert.gif" />
           </div>
           <div className="flex items-center max-w-[50%] px-5 ml-8">
             <h2 className="text-5xl font-semibold align-middle">
