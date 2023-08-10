@@ -2302,6 +2302,11 @@ html {
   margin-bottom: 5rem;
 }
 
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
 .ml-24 {
   margin-left: 6rem;
 }
@@ -2344,6 +2349,18 @@ html {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mt-40 {
+  margin-top: 10rem;
+}
+
+.ml-8 {
+  margin-left: 2rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .flex {
@@ -2392,6 +2409,18 @@ html {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[800px\] {
+  height: 800px;
+}
+
+.h-\[600px\] {
+  height: 600px;
+}
+
+.h-\[500px\] {
+  height: 500px;
 }
 
 .max-h-80 {
@@ -2656,6 +2685,10 @@ html {
   background-color: rgb(113 113 122 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .object-scale-down {
   -o-object-fit: scale-down;
      object-fit: scale-down;
@@ -2731,12 +2764,21 @@ html {
   padding-bottom: 1.25rem;
 }
 
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 .text-left {
   text-align: left;
 }
 
 .text-center {
   text-align: center;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .font-serif {
