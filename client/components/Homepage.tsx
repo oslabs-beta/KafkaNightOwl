@@ -23,7 +23,7 @@ const Homepage = ({ setLoggedIn }) => {
     <>
       {/* INTRO TITLE AND LOGIN/SIGNUP */}
 
-      <div className="flex w-screen h-5/6 bg-slate-800">
+      <div className="flex w-screen h-auto bg-slate-800">
         <div className="w-1/2 h-full flex flex-col ml-24 p-8 text-center text-zinc-100">
           <div className="flex items-end ml-24">
             <div className="flex flex-col items-center mt-20">
@@ -37,7 +37,7 @@ const Homepage = ({ setLoggedIn }) => {
               <h2 className="text-5xl italic mt-5">
                 Real-time insights & alerts.
               </h2>
-              <h4 className="text-3xl w-5/6 leading-10 text-center mt-20 ml-6">
+              <h4 className="text-3xl leading-10 text-center my-12">
                 Your Gateway to Streamlined Monitoring. Harness the power of
                 real-time metrics and actionable insights as we transform your local
                 Kafka stream.
