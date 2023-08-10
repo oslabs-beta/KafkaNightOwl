@@ -33,7 +33,7 @@ const Homepage = ({setLoggedIn}) => {
               <h2 className="text-5xl italic mt-5">Real-time insights & alerts.</h2>
             </div>
             <div className="">
-              <img className="object-scale-down w-48" src="../assets/image/logo.png" />
+              <img className="object-scale-down w-48" src="../assets/image/white.png" />
             </div>
           </div>
           
