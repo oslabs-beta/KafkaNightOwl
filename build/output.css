@@ -2292,27 +2292,30 @@ html {
   margin-right: 1rem;
 }
 
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.my-20 {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
-}
-
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .ml-24 {
   margin-left: 6rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .ml-6 {
   margin-left: 1.5rem;
+}
+
+.ml-8 {
+  margin-left: 2rem;
 }
 
 .ml-auto {
@@ -2335,12 +2338,12 @@ html {
   margin-top: 5rem;
 }
 
-.mt-36 {
-  margin-top: 9rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-40 {
+  margin-top: 10rem;
 }
 
 .mt-5 {
@@ -2349,18 +2352,6 @@ html {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mt-40 {
-  margin-top: 10rem;
-}
-
-.ml-8 {
-  margin-left: 2rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
 }
 
 .flex {
@@ -2399,6 +2390,10 @@ html {
   height: 400px;
 }
 
+.h-\[500px\] {
+  height: 500px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -2409,18 +2404,6 @@ html {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[800px\] {
-  height: 800px;
-}
-
-.h-\[600px\] {
-  height: 600px;
-}
-
-.h-\[500px\] {
-  height: 500px;
 }
 
 .max-h-80 {
@@ -2630,11 +2613,6 @@ html {
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
-.bg-orange-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 186 116 / var(--tw-bg-opacity));
-}
-
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -2670,6 +2648,10 @@ html {
   background-color: rgb(15 23 42 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -2678,15 +2660,6 @@ html {
 .bg-zinc-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(244 244 245 / var(--tw-bg-opacity));
-}
-
-.bg-zinc-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(113 113 122 / var(--tw-bg-opacity));
-}
-
-.bg-transparent {
-  background-color: transparent;
 }
 
 .object-scale-down {
@@ -2712,6 +2685,11 @@ html {
 
 .p-8 {
   padding: 2rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .px-12 {
@@ -2749,11 +2727,6 @@ html {
   padding-bottom: 0.5rem;
 }
 
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -2762,11 +2735,6 @@ html {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
 }
 
 .text-left {

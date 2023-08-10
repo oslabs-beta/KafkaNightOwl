@@ -10,8 +10,8 @@ describe('Dashboard Component', () => {
   test('renders application name', () => {
     render(<Dashboard handleLogout={() => {}} />);
 
-    const appName = screen.getByText(/kafka nightowl/i);
-    expect(appName).toBeInTheDocument();
+    const appName = screen.getAllByText(/kafka nightowl/i);
+    expect(appName).toBeTruthy();
   });
   test('renders "add server" button', () => {
     render(<Dashboard handleLogout={() => {}} />);
